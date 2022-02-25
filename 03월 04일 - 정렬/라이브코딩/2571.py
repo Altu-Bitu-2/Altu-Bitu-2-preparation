@@ -5,10 +5,6 @@ import sys
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
-n = int(input())
-arr = [int(input()) for _ in range(n)]
-sorted_arr = [0]*n
-
 def merge(left, mid, right):
     p1 = left
     p2 = mid + 1
@@ -42,9 +38,14 @@ def mergeSort(left, right):
         mergeSort(mid+1, right)
         merge(left, mid, right)
 
+#  입력 받기
+n = int(input())
+arr = [int(input()) for _ in range(n)]  # 정렬할 배열
+sorted_arr = [0]*n  # 정렬한 배열
 
 # mergeSort(0, n-1)
-arr.sort()  # 내장함수를 이용하세요.
+arr.sort()  # 메소드를 이용하세요.
+# arr = sorted(arr)와도 같은 의미입니다. 단, sorted는 원본 배열을 변경하지 않고, 정렬된 배열을 리턴하는 함수입니다.
 
 for i in arr:
     print(i)
