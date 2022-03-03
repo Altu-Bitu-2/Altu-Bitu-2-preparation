@@ -41,11 +41,11 @@ void merge(int left, int mid, int right) {
 }
 
 //합병 정렬(divide)
-void mergeSort(int n, int left, int right) {
+void mergeSort(int left, int right) {
     if (left < right) { //원소 하나가 될 때까지 나눔
         int mid = (left + right) / 2; //정확히 반으로 나눈다
-        mergeSort(n, left, mid); //왼쪽 배열
-        mergeSort(n, mid + 1, right); //오른쪽 배열
+        mergeSort(left, mid); //왼쪽 배열
+        mergeSort(mid + 1, right); //오른쪽 배열
 
         //정렬 전 배열 출력
         printArr(left, mid, "left");
@@ -71,8 +71,8 @@ int main() {
         cin >> arr[i];
     }
     //연산
-    //mergeSort(n, 0, n - 1);
-    sort(arr.begin(), arr.end());
+    mergeSort(0, n - 1);
+    //sort(arr.begin(), arr.end());
     //출력
     for (int i = 0; i < n; i++) {
         cout << arr[i] << '\n';
