@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -70,7 +71,8 @@ int main() {
         cin >> arr[i];
     }
     //연산
-    mergeSort(n, 0, n - 1);
+    //mergeSort(n, 0, n - 1);
+    sort(arr.begin(), arr.end());
     //출력
     for (int i = 0; i < n; i++) {
         cout << arr[i] << '\n';
