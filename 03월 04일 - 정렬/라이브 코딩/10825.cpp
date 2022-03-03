@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//(python3) 파이썬은 리스트에 문자열과 정수를 동시에 저장할 수 있으니, 그냥 리스트를 사용하면 된다
 struct student { //학생들의 정보를 나타내는 구조체
     string name;
     int kor, eng, math;
