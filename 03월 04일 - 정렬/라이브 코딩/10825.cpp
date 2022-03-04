@@ -26,6 +26,7 @@ bool cmp(const student &a, const student &b) {
 }
 
 //비교 함수(good)
+//(python3) lambda 함수를 이용해서 보다 편리하게 각 index에 대한 각각의 정렬을 짤 수 있음 (피피티 자료 참고)
 bool cmpAdv(const student &a, const student &b) {
     if (a.kor != b.kor) //1. 국어 점수가 다르다면 감소하는 순서
         return a.kor > b.kor;
