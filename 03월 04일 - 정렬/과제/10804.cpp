@@ -7,7 +7,7 @@ const int SIZE = 20;
 
 vector<int> arr(SIZE + 1); //1번 인덱스부터 시작하기 위해 크기를 (SIZE + 1)로 선언
 
-//a ~ b를 역순으로 배치하는 함수, reverse 함수 구현
+//a ~ b를 역순으로 배치하는 함수, reverse 함수 직접 구현
 void reverseAtoB(int a, int b) {
     //더하고 빼는 변화값을 증가변수로 줘서 사용, 절반까지만
     for (int i = 0; i <= (b - a) / 2; i++) {
@@ -17,7 +17,8 @@ void reverseAtoB(int a, int b) {
 
 /**
  * 단순 구현 문제.
- * 카드를 역순으로 두기 = 수열을 반으로 접었다 생각할 때, 마주보는 원소끼리 swap!
+ * 1. 직접 구현: 카드를 역순으로 두기 = 수열을 반으로 접었다 생각할 때, 마주보는 원소끼리 swap!
+ * 2. 함수 활용: <algorithm> 헤더에 있는 "reverse" 함수 사용 -> reverse(시작 반복자, 종료 반복자): 시작 ~ 종료전까지 원소들을 뒤집음
  */
 
 int main() {
@@ -29,7 +30,7 @@ int main() {
     }
     //입력 & 연산
     while (cin >> a >> b) { //입력이 있을 때까지만 받음 (입력이 끝나면 ctrl+D 를 눌러서 종료!)
-        //reverse(시작 반복자, 종료 반복자): 시작 ~ 종료전까지 원소들을 뒤집음 (<algorithm> 헤더 필요)
+        //헤더 함수 사용
         reverse(arr.begin() + a, arr.begin() + b + 1);
 
         //직접 구현
