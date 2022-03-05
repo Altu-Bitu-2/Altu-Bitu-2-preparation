@@ -1,12 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 const int SIZE = 20;
 
-vector<int> arr(SIZE);
+vector<int> arr(SIZE + 1); //1번 인덱스부터 시작하기 위해 크기를 (SIZE + 1)로 선언
 
-//a ~ b를 역순으로 배치하는 함수
+//a ~ b를 역순으로 배치하는 함수, reverse 함수 구현
 void reverseAtoB(int a, int b) {
     //더하고 빼는 변화값을 증가변수로 줘서 사용, 절반까지만
     for (int i = 0; i <= (b - a) / 2; i++) {
@@ -23,16 +24,19 @@ int main() {
     int a, b;
 
     //카드 초기화
-    for (int i = 0; i < SIZE; i++) {
-        arr[i] = i + 1;
+    for (int i = 1; i <= SIZE; i++) {
+        arr[i] = i;
     }
     //입력 & 연산
-    for (int i = 0; i < 10; i++) {
-        cin >> a >> b;
-        reverseAtoB(a - 1, b - 1);
+    while (cin >> a >> b) { //입력이 있을 때까지만 받음 (입력이 끝나면 ctrl+D 를 눌러서 종료!)
+        //reverse(시작 반복자, 종료 반복자): 시작 ~ 종료전까지 원소들을 뒤집음 (<algorithm> 헤더 필요)
+        reverse(arr.begin() + a, arr.begin() + b + 1);
+
+        //직접 구현
+        //reverseAtoB(a, b);
     }
     //출력
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 1; i <= SIZE; i++) {
         cout << arr[i] << ' ';
     }
     return 0;
