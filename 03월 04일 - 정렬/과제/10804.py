@@ -18,5 +18,8 @@ for _ in range(10):
     a, b = map(int, input().split())
     reverse_card(a, b)
 
+# print()는 end와 sep 값을 지정해서 출력을 원하는 대로 할 수 있어요.
+# end는 출력 끝에 덧붙는 문자(열), sep은 여러개를 출력할 때 구분해주는 구분자
+# default 값은 end='\n', sep = ' '
 for i in arr[1:]:
     print(i, end=' ')
