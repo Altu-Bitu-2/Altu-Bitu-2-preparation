@@ -18,10 +18,11 @@ def solution():
     for num in note2:
         # bisect_left 함수는 정렬된 리스트에서 새로운 값이 들어갈 수 있는 첫번째 인덱스를 리턴합니다.
         # bisect_right 함수는 정렬된 리스트에서 새로운 값이 들어갈 수 있는 마지막 인덱스를 리턴합니다.
-        if bisect_left(note1, num) < bisect_right(note1, num):
-            print(1)
-        else:
+        # 만약 num이 note1에 포함되어 있지 않다면, 둘의 결과 값은 같게 됩니다.
+        if bisect_left(note1, num) == bisect_right(note1, num):
             print(0)
+        else:
+            print(1)
 
 t = int(input())
 
