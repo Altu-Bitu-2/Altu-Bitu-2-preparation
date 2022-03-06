@@ -8,8 +8,9 @@ long long calTip(int n, vector<int> &tips) {
     long long ans = 0;
     for (int i = 0; i < n; i++) {
         int cur_tip = tips[i] - i;
-        if (cur_tip > 0)
-            ans += cur_tip;
+        if (cur_tip < 0) //음수면 팁에 더하지 않는데 처음에 내림차순 정렬했으므로 아예 break
+            break;
+        ans += cur_tip;
     }
     return ans;
 }
@@ -30,7 +31,7 @@ int main() {
         cin >> tips[i];
     }
     //연산
-    sort(tips.begin(), tips.end(), greater<>());
+    sort(tips.begin(), tips.end(), greater<>()); //내림차순 정렬
     //출력
     cout << calTip(n, tips) << '\n';
     return 0;

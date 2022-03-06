@@ -29,6 +29,7 @@ int main() {
         arr[i] = i;
     }
     //입력 & 연산
+    //입력이 10개로 한정되므로 for문으로 10번 입력받는 것도 가능!
     while (cin >> a >> b) { //입력이 있을 때까지만 받음 (입력이 끝나면 ctrl+D 를 눌러서 종료!)
         //헤더 함수 사용
         reverse(arr.begin() + a, arr.begin() + b + 1);
