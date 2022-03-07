@@ -2,8 +2,11 @@ import sys
 input = sys.stdin.readline
 
 # ver1) 셋을 이용한 풀이입니다.
+    
 
-def solution():
+t = int(input())
+
+for _ in range(t):
     # 입력
     n = int(input())
     note1 = set(map(int, input().split()))
@@ -16,9 +19,3 @@ def solution():
             print(1)
         else:
             print(0)
-    return
-
-t = int(input())
-
-for _ in range(t):
-    solution()

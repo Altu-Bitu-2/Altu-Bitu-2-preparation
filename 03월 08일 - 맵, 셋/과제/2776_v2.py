@@ -3,9 +3,11 @@ from bisect import bisect_left, bisect_right
 input = sys.stdin.readline
 
 # ver2) 아직 배우지는 않았지만, 후반부에 배울 이분탐색을 이용한 풀이입니다.
-# O(n)의 시간복잡도를 갖는 선형탐색(linear search)는 달리, 이분탐색(binary search)는 O(logn)의 시간 복잡도를 갖습니다.
+# O(n)의 시간복잡도를 갖는 선형탐색(linear search)는 달리, 이분탐색(binary search)는 O(logn)의 시간 복잡도를 갖습니다. 
 
-def solution():
+t = int(input())
+
+for _ in range(t):
     # 입력
     n = int(input())
     note1 = list(map(int, input().split()))
@@ -23,8 +25,3 @@ def solution():
             print(0)
         else:
             print(1)
-
-t = int(input())
-
-for _ in range(t):
-    solution()
