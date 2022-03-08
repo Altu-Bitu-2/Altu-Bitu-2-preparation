@@ -11,6 +11,11 @@ using namespace std;
  */
 
 int main() {
+    //로컬에서 편하게 확인하기 위해 파일로 입력을 받아서 사용!
+    //이때 파일 읽어오기가 제대로 안된다면 다음 블로그 포스팅 참고
+    //링크: https://blog.naver.com/PostView.nhn?blogId=strike0115&logNo=221519898666&from=search&redirect=Log&widgetTypeCall=true&directAccess=false
+    //freopen("input.txt", "r", stdin);
+
     string s, e, q, t, name;
     map<string, bool> m;
     int ans = 0; //출석 확인된 학회원 인원 수
