@@ -18,8 +18,10 @@ int gcdBad(int a, int b) {
 
 // 유클리드 호제법으로 연산.
 int gcdRecursion(int a, int b) {
-    // a가 b보다 작다고 가정하고, 유클리드 연산법 사용.
-    if (b == 0) return a;
+    // a가 b보다 크다고 가정하고, 유클리드 연산법 사용.
+    if (b == 0) {
+        return a;
+    }
     return gcdRecursion(b, a % b);
 }
 
