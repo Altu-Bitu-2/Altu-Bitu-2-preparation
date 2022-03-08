@@ -23,6 +23,8 @@ int main() {
     while (m--) {
         cin >> input;
         if (isdigit(input[0])) { //숫자 입력이라면
+            //(python3) int(): str or float -> int
+            //인라인 단축키 써서(컨트롤+알트+N) 합친 것도 보여주려고 합니다.(튜터용)
             int number = stoi(input); //stoi: string to int
             cout << pocket_num[number] << '\n'; //number에 대응하는 value(이름) 출력
         } else { //문자열이라면
