@@ -15,8 +15,7 @@ for _ in range(n):
     else:
         extension[ext] = 1
 
-answer = list(zip(extension.keys(), extension.values()))
-answer.sort()
+answer = sorted(extension.items())
 
 for key, value in answer:
     print(key, value)
