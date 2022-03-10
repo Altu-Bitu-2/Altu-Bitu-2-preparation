@@ -67,16 +67,17 @@ int main() {
         cin >> arr[i];
     }
     sort(arr.begin(), arr.end());
-    // 산술평균 구하기, 나눠주기 위해서 float형으로 받아야 합니다.
-    float sum = accumulate(arr.begin(), arr.end(), 0);
+    // 산술평균
+    float sum = accumulate(arr.begin(), arr.end(), 0);  // n으로 나눠주기 위해 float형으로 선언
+    // round() 함수를 사용할 수도 있어요. 다만 -0이 나오지 않도록 조건문을 사용해야 합니다.
     cout << floor(sum / n + 0.5) << '\n';
 
-    // 중앙값 구하기
+    // 중앙값
     cout << arr[n / 2] << '\n';
 
-    // 최빈값 구하기
+    // 최빈값
     cout << findMode(n, arr) << '\n';
 
-    // 범위 구하기
+    // 범위
     cout << arr[n - 1] - arr[0] << '\n';
 }
