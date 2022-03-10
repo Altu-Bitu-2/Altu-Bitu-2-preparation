@@ -12,7 +12,7 @@ const int SIZE = 26;    // 알파벳의 수
 
 vector<int> countAlphabet(string text) {
     // text에 있는 각 알파벳의 개수를 세어 리턴하는 함수
-    vector<int> count(SIZE, 0);
+    vector<int> count(SIZE, 0); // A-Z까지 문자의 개수를 저장할 리스트
     for (auto i: text) {
         // 각 문자를 인덱스로 바꿔주기 위해 'A'의 인덱스를 빼줌
         count[i - 'A']++;

@@ -14,28 +14,28 @@ typedef pair<int, int> ci;  // pair<int, int>에 ci라는 별칭 부여
 
 // 비교함수
 bool cmp(const ci &a, const ci &b) {
-    if (a.first == b.first) {
-        return a.second < b.second;
+    if (a.second == b.second) {
+        return a.first < b.first;
     }
-    return a.first > b.first;
+    return a.second > b.second;
 }
 
 int findMode(int n, vector<int> &arr) {
     // 정렬된 벡터에서 최빈값을 찾아 반환하고, 만약 최빈값이 여러개라면 두번째로 작은 값을 반환하는 함수
-    vector<ci> count;   // 정수의 개수와 해당 정수 값을 pair로 묶어서 저장하는 벡터
-    // first: 개수, second: 값
+    vector<ci> count;   // 정수의 값와 해당 정수 개수를 pair로 묶어서 저장하는 벡터
+    // first: 값, second: 개수
 
     int current_idx = 0;    // 현재의 인덱스를 저장하는 변수
-    count.push_back({1, arr[0]});   // 첫번째 값을 입력하여 for문에서 index 에러 방지
+    count.push_back({arr[0], 1});   // 첫번째 값을 입력하여 for문에서 index 에러 방지
 
     for (int i = 1; i < n; i++) {
         // 만약 직전 값과 같은 값이라면
         if (arr[i] == arr[i - 1]) {
             // 개수 +1
-            count[current_idx].first++;
+            count[current_idx].second++;
         } else {
             // 그렇지 않다면, 새로운 값을 count 벡터에 삽입
-            count.push_back({1, arr[i]});
+            count.push_back({arr[i], 1});
             current_idx++;
         }
     }
@@ -51,10 +51,10 @@ int findMode(int n, vector<int> &arr) {
     sort(count.begin(), count.end(), cmp);
 
     // 최빈 값이 여러개인지 확인
-    if (count[0].first == count[1].first) {
-        return count[1].second;
+    if (count[0].second == count[1].second) {
+        return count[1].first;
     }
-    return count[0].second;
+    return count[0].first;
 }
 
 int main() {
