@@ -13,6 +13,7 @@ bool isBalanced(string &s) {
     m[')'] = '(';
 
     for (int i = 0; i < s.length(); i++) {
+        //(python3) 파이썬은 switch-case문을 지원하지 않으므로, if-else문 사용하면 됨.
         switch (s[i]) {
             case '(': case '[': //여는 괄호
                 st.push(s[i]);
