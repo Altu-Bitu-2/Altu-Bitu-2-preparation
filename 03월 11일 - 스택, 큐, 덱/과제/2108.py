@@ -1,9 +1,10 @@
 import sys
 from math import floor  # round 함수를 대체할 floor(내림)함수
+from collections import Counter
 input = sys.stdin.readline
 
 def find_mode(n, arr):
-    # 정렬된 벡터에서 최빈값을 찾아 반환하고, 만약 최빈값이 여러개라면 두번째로 작은 값을 반환하는 함수
+    # 정렬된 리스트에서 최빈값을 찾아 반환하고, 만약 최빈값이 여러개라면 두번째로 작은 값을 반환하는 함수
     count = [] # [정수의 값, 정수의 개수]으로 구성된 리스트
 
     current_idx = 0 # 현재 인덱스를 저장하는 변수
@@ -35,6 +36,21 @@ def find_mode(n, arr):
     
     return count[0][0]
 
+def find_mode_with_counter(arr):
+    # Counter(arr) : arr에 있는 각 요소가 몇개인지 딕셔너리 형태로 돌려준다.
+    # .most_common(n): 가장 많은 상위 n 개를 리스트에 담아 돌려준다.
+    # 이때 개수가 같다면 순서는 원본 리스트(arr)에서의 순서에 따른다.
+    count = Counter(arr).most_common(2)     # 여기서 arr은 이미 정렬된 상태로 함수에 전달되므로 따로 정렬X
+
+    # 만약 값이 한 종류라면, 바로 리턴 -> 아래에서 인덱스 에러 방지
+    if len(count) == 1:
+        return count[0][0]
+
+    # 최빈값이 여러개인지 확인
+    if count[0][1] == count[1][1]:
+        return count[1][0]
+    
+    return count[0][0]
 
 def print_values(n, arr):
     # 산술평균
@@ -48,7 +64,8 @@ def print_values(n, arr):
     print(arr[n//2])
 
     # 최빈값
-    print(find_mode(n, arr))
+    # print(find_mode(n, arr))
+    print(find_mode_with_counter(arr))
 
     # 범위
     print(arr[-1] - arr[0])
