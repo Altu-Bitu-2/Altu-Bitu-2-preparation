@@ -1,8 +1,9 @@
 import sys
+from collections import Counter
 input = sys.stdin.readline
 
 SIZE = 26
-ORD_A = ord('A')    # A의 
+ORD_A = ord('A')    # A의 아스키코드
 
 def count_alphabet(text):
     # text의 알파벳 개수를 세어 리턴하는 함수

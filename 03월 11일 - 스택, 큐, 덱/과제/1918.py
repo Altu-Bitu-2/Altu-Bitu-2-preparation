@@ -23,7 +23,7 @@ priority["bottom"] = -1     # 스택의 가장 밑 부분을 표기하기 위해
 # 중위 표기식 -> 후위 표기식
 def infix_to_postfix(string):
     # 쌓아두기
-    stack = ["bottom"]     # stack의 top을 불러오는 과정에서 인덱스 에러가 나지 않도록 미리 bottom을 삽입
+    stack = ["bottom"]     # stack이 비어있을 때 stack[-1]를 호출할 경우 인덱스 에러가 난다. 이를 방지하기 위해 미리 bottom을 삽입
     answer = ""
 
     for i in string:
