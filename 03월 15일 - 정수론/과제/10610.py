@@ -1,5 +1,4 @@
 import sys
-from collections import Counter
 input = sys.stdin.readline
 
 """
@@ -13,24 +12,21 @@ input = sys.stdin.readline
 """
 
 def find_number(n):
-    digits = Counter(n)
+    digits = list(n)
+    digits.sort(reverse=True)   # 가장 큰 수를 만들기 위해 역순으로 정렬
 
     # 0이 존재하지 않으면, return -1
-    if '0' not in digits:
+    if digits[-1] != '0':
         return -1
     
-    answer = ""
     total = 0   # 3의 배수인지 확인하기 위해 모든 자리수를 더함
 
-    # 9부터 0까지
-    for i in range(9, -1, -1):
-        if str(i) in digits:
-            total += i * digits[str(i)]     # 숫자를 개수만큼 곱해서 total에 더해줌
-            answer += str(i) * digits[str(i)]
+    for i in digits:
+        total += int(i)
 
     # 3의 배수임을 확인
     if total % 3 == 0:
-        return answer
+        return ''.join(digits)
     else:
         return -1
 
