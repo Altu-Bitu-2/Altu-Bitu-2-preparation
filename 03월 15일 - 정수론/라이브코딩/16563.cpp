@@ -12,13 +12,15 @@ vector<int> isPrime() {
     // n 이하의 수를 소인수분해하는 경로를 리턴하는 함수.
     vector<int> prime(MAX + 1, 0);
     for (int i = 2; i * i <= MAX; i++) {
-        // 값이 0이면 소수이다.
-        if (prime[i] == 0) {
-            // i부터 i*(i-1)은 이미 앞선 소수들에 의해 지워졌음.
-            for (int j = i * i; j <= MAX; j += i) {
-                if (prime[j] == 0) {
-                    prime[j] = i;
-                }
+        // 소수가 아니면 continue
+        if (prime[i] > 0) {
+            continue;
+        }
+        // i가 소수라면
+        // i부터 i*(i-1)은 이미 앞선 소수들에 의해 지워졌음.
+        for (int j = i * i; j <= MAX; j += i) {
+            if (prime[j] == 0) {
+                prime[j] = i;
             }
         }
     }
