@@ -22,8 +22,7 @@ def make_palindrome(text):
             # 비어있다면, 할당
             part2 = key
         
-        for _ in range(value//2):
-            part1 += key
+        part1 += key * (value//2)
     
     return part1 + part2 + part1[::-1]
 

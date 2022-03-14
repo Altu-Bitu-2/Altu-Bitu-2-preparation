@@ -2,21 +2,32 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
+"""
+결과값을 보고 처음 도출 -> 기술을 모두 반대로 쓰자!
+1. 제일 위의 카드 앞에 넣기
+2. 제일 위의 카드 앞에서 두번째에 넣기
+3. 제일 위의 카드 뒤에 넣기
+"""
+
+# 입력
 n = int(input())
 cmd = list(map(int, input().split()))
 
-card = list(range(n, 0, -1))
-playing = deque()
+cards = deque()
 
-for i in cmd[::-1]:
-    if i == 1:
-        playing.append(card.pop())
-    elif i == 2:
-        temp = playing.pop()
-        playing.append(card.pop())
-        playing.append(temp)
+# 1번부터 n번 카드까지
+for i in range(1, n+1):
+    op = cmd[-i]    # 기술을 뒤에서부터 쓰기
+    if op == 1:
+        cards.appendleft(i)
+    elif op == 2:
+        # cards = [temp, ...]
+        temp = cards.popleft()
+        cards.appendleft(i) # cards = [i, ...]
+        cards.appendleft(temp) # cards = [temp, i, ...]
     else:
-        playing.appendleft(card.pop())
+        cards.append(i)
 
-for i in range(n):
-    print(playing.pop(), end=' ')
+# 출력
+for i in cards:
+    print(i, end=' ')
