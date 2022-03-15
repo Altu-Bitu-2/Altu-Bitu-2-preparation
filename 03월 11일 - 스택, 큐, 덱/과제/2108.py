@@ -3,6 +3,18 @@ from math import floor  # round 함수를 대체할 floor(내림)함수
 from collections import Counter
 input = sys.stdin.readline
 
+"""
+[통계학]
+1. 산술 평균 계산 시 반올림에 주의
+    - python의 round 함수는 사사오입 원칙을 따릅니다.
+    - 즉, 반올림 할 숫자가 5이면 앞자리를 짝수로 만들도록 올림/내림합니다.
+    - 따라서, 우리가 원하는 출력을 하기 위해서는 round 함수를 쓰면 안됩니다.
+2. n은 홀수 이므로 중앙값은 항상 (n/2)번째 인덱스
+3. 최빈값은 동일한 빈도수 내에서 두 번째로 '작은' 값
+4. 최빈값이 유일한 경우 고려
+"""
+
+# Counter 없이 직접 최빈값 찾는 함수
 def find_mode(n, arr):
     # 정렬된 리스트에서 최빈값을 찾아 반환하고, 만약 최빈값이 여러개라면 두번째로 작은 값을 반환하는 함수
     count = [] # [정수의 값, 정수의 개수]으로 구성된 리스트
@@ -36,6 +48,7 @@ def find_mode(n, arr):
     
     return count[0][0]
 
+# collections.Counter 사용해서 최빈값 찾는 함수
 def find_mode_with_counter(arr):
     # Counter(arr) : arr에 있는 각 요소가 몇개인지 딕셔너리 형태로 돌려준다.
     # .most_common(n): 가장 많은 상위 n 개를 리스트에 담아 돌려준다.
@@ -54,9 +67,7 @@ def find_mode_with_counter(arr):
 
 def print_values(n, arr):
     # 산술평균
-    # python의 round 함수는 사사오입 원칙을 따릅니다.
-    # 즉, 반올림 할 숫자가 5이면 앞자리를 짝수로 만들도록 올림/내림합니다.
-    # 따라서, 우리가 원하는 출력을 하기 위해서는 round 함수를 쓰면 안됩니다.
+
     mean = sum(arr) / n
     print(floor(mean + 0.5))    # 0.5를 더해 내림해주면, 우리가 생각한대로 4까지는 내림, 5부터는 올림 연산을 수행하게 됩니다.
 
