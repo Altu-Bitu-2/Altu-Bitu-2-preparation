@@ -34,8 +34,10 @@ while True:
     n = int(input())
     if n == 0:
         break
-
-    for i in range(3, n):
+    
+    # 3부터 n//2까지 홀수만 검사
+    # n//2 + 1 이상에서의 탐색은 필요 없음.
+    for i in range(3, n//2 + 1, 2):
         # i와 n-i가 둘 다 소수이면 더해서 n이 되는 두 소수를 찾은 것이므로 종료
         if is_prime[i] and is_prime[n-i]:
             print(n, '=', i, '+', n-i)
