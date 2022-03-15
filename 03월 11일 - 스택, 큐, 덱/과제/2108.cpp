@@ -1,7 +1,3 @@
-//
-// Created by JIYOUNG.P on 2022-03-10.
-//
-
 #include <iostream>
 #include <vector>
 #include <algorithm>    // sort() 사용
@@ -23,7 +19,7 @@ bool cmp(const ci &a, const ci &b) {
 int findMode(int n, vector<int> &arr) {
     // 정렬된 벡터에서 최빈값을 찾아 반환하고, 만약 최빈값이 여러개라면 두번째로 작은 값을 반환하는 함수
     vector<ci> count;   // 정수의 값와 해당 정수 개수를 pair로 묶어서 저장하는 벡터
-    // first: 값, second: 개수
+                        // first: 값, second: 개수
 
     int current_idx = 0;    // 현재의 인덱스를 저장하는 변수
     count.push_back({arr[0], 1});   // 첫번째 값을 입력하여 for문에서 index 에러 방지
@@ -31,7 +27,6 @@ int findMode(int n, vector<int> &arr) {
     for (int i = 1; i < n; i++) {
         // 만약 직전 값과 같은 값이라면
         if (arr[i] == arr[i - 1]) {
-            // 개수 +1
             count[current_idx].second++;
         } else {
             // 그렇지 않다면, 새로운 값을 count 벡터에 삽입
@@ -57,6 +52,14 @@ int findMode(int n, vector<int> &arr) {
     return count[0].first;
 }
 
+/*
+ * [통계학]
+ * 1. 산술 평균 계산 시 실수 자료형 사용, 반올림에 주의
+ * 2. n은 홀수 이므로 중앙값은 항상 (n/2)번째 인덱스
+ * 3. 최빈값은 동일한 빈도수 내에서 두 번째로 '작은' 값
+ * 4. 최빈값이 유일한 경우 고려
+ * */
+
 int main() {
     int n;
     cin >> n;
@@ -68,7 +71,7 @@ int main() {
     }
     sort(arr.begin(), arr.end());
     // 산술평균
-    float sum = accumulate(arr.begin(), arr.end(), 0);  // n으로 나눠주기 위해 float형으로 선언
+    float sum = accumulate(arr.begin(), arr.end(), 0);
     // round() 함수를 사용할 수도 있어요. 다만 -0이 나오지 않도록 조건문을 사용해야 합니다.
     cout << floor(sum / n + 0.5) << '\n';
 
