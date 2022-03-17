@@ -5,15 +5,15 @@
 using namespace std;
 
 vector<int> simulation(int k, queue<int> &q) {
-    vector<int> result;
-    int cnt = 0;
+    vector<int> result; //요세푸스 순열
+    int cnt = 0; //카운트 변수
 
     while (!q.empty()) {
         int x = q.front();
         q.pop();
         cnt++;
         if (cnt == k) { //k번째 pop하는 원소라면
-            result.push_back(x); //정답 벡터에 추가
+            result.push_back(x); //요세푸스 순열에 저장
             cnt = 0; //카운트 초기화
             continue;
         }
@@ -23,8 +23,9 @@ vector<int> simulation(int k, queue<int> &q) {
 }
 
 /**
- * 큐 초기화 후 pop, push 반복
- * k번째 pop일 경우 정답 벡터에 push_back
+ * 1. 큐에 1 ~ N까지 값 초기화
+ * 2. 이후 k 번째 사람 찾기 위해 pop, push 반복
+ * 3. k번째 pop 일 경우 요세푸스 순열에 저장, 이후 원소 제거 (다시 push 하지 않음!)
  */
 
 int main() {
