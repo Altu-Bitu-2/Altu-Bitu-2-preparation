@@ -32,8 +32,9 @@ int main() {
     int ab = lcm / gcd;
     int a = -1, b = -1;
     for (int i = sqrt(ab); i > 0; i--) { //a, b의 차이가 가장 작을 제곱근부터 체크
-        if (ab % i != 0)
+        if (ab % i != 0) {
             continue;
+        }
         //i가 ab의 약수라면
         int tmp_a = i, tmp_b = ab / i;
         //두 수가 서로소인지 체크 -> 만약 두 수가 서로소가 아니라면 두 수의 최대공약수가 gcd가 될 수 없음
