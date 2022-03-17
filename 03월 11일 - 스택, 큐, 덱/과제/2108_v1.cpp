@@ -71,9 +71,9 @@ int main() {
     }
     sort(arr.begin(), arr.end());
     // 산술평균
-    float sum = accumulate(arr.begin(), arr.end(), 0);
+    int sum = accumulate(arr.begin(), arr.end(), 0);
     // round() 함수를 사용할 수도 있어요. 다만 -0이 나오지 않도록 조건문을 사용해야 합니다.
-    cout << floor(sum / n + 0.5) << '\n';
+    cout << floor((double)sum / n + 0.5) << '\n';
 
     // 중앙값
     cout << arr[n / 2] << '\n';

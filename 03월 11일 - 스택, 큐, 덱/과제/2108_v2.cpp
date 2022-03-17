@@ -45,10 +45,10 @@ int main() {
     vector<int> num(n);
     vector<int> frequency(SIZE * 2 + 1, 0); //인덱스는 입력 수 + 4000의 값. 따라서 0 ~ 8000. 각 인덱스에 해당 수가 얼마나 나왔는지 저장
 
-    double sum = 0; //평균 구하기 위한 합 변수
+    int sum = 0; //평균 구하기 위한 합 변수
     for (int i = 0; i < n; i++) {
         cin >> num[i];
-        sum += (double) num[i];
+        sum += num[i];
         frequency[num[i] + SIZE]++;
     }
 
@@ -57,10 +57,10 @@ int main() {
 
     //출력
     //산술평균
-    if (round(sum / n) == -0)
+    if (round((double)sum / n) == -0)
         cout << "0\n";
     else
-        cout << round(sum / n) << '\n';
+        cout << round((double)sum / n) << '\n';
     cout << num[n / 2] << '\n';               //중앙값
     cout << findMode(frequency) << '\n';      //최빈값
     cout << num[n - 1] - num[0] << '\n';      //범위
