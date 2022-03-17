@@ -3,15 +3,13 @@
 
 using namespace std;
 
-//항상 x >= y 이므로 대소관계를 체크하지 않음
-int calcGCD(int x, int y) {
-    int tmp;
-    while (y != 0) {
-        tmp = x % y;
-        x = y;
-        y = tmp;
+// 유클리드 호제법
+int gcdRecursion(int a, int b) {
+    // a > b 일 때, a와 b의 최대공약수를 리턴
+    if (b == 0) {
+        return a;
     }
-    return x;
+    return gcdRecursion(b, a % b);
 }
 
 /**
@@ -23,6 +21,7 @@ int calcGCD(int x, int y) {
  *
  * A+B가 최소가 되려면, a+b가 최소가 되어야 하고, 그러기 위해선 a, b의 차이가 최소여야 한다.
  */
+
 int main() {
     int gcd, lcm;
 
@@ -38,7 +37,7 @@ int main() {
         //i가 ab의 약수라면
         int tmp_a = i, tmp_b = ab / i;
         //두 수가 서로소인지 체크 -> 만약 두 수가 서로소가 아니라면 두 수의 최대공약수가 gcd가 될 수 없음
-        if (calcGCD(tmp_b, tmp_a) == 1) { 
+        if (gcdRecursion(tmp_b, tmp_a) == 1) {
             a = tmp_a;
             b = tmp_b;
             break;

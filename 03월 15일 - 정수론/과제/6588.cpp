@@ -1,23 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
 
 using namespace std;
 
-const int SIZE = 1000000;
+const int SIZE = 1e6;
 
 //에라토스테네스의 체, 미리 SIZE까지의 소수 판단
 vector<bool> isPrime() {
     vector<bool> is_prime(SIZE + 1, true); //소수 판단 여부 저장
 
     is_prime[0] = is_prime[1] = false;
-    for (int i = 2; i <= sqrt(SIZE); i++) {
-        if (is_prime[i]) { //i가 소수라면
-            for (int j = i * i; j <= SIZE; j += i)
-                is_prime[j] = false; //i의 배수 제거
+    for (int i = 2; i * i <= SIZE; i++) {
+        if (!is_prime[i]) { //소수가 아니라면
+            continue;
+        }
+        //i가 소수라면
+        for (int j = i * i; j <= SIZE; j += i) {
+            is_prime[j] = false; //i의 배수 제거
         }
     }
-
     return is_prime;
 }
 

@@ -3,23 +3,24 @@
 
 using namespace std;
 
-const int SIZE = 100000;
+const int MAX = 1e5;
 
-vector<int> prime(SIZE + 1, 0); //소수 경로 저장
-vector<int> exponent(SIZE + 1, 0); //연산 과정에서 각 소수의 지수 저장
+vector<int> prime(MAX + 1, 0); //소수 경로 저장
+vector<int> exponent(MAX + 1, 0); //연산 과정에서 각 소수의 지수 저장
 
 //소수 경로 저장해서 리턴하는 함수
 void isPrime() {
-    //먼저 모든 수를 소수라 가정하고, i번째 인덱스에 i값 저장
-    for (int i = 2; i <= SIZE; i++) prime[i] = i;
-
-    //소수 판별
-    for (int i = 2; i * i <= SIZE; i++) {
-        if (prime[i] == i) { //소수라면
-            for (int j = i * i; j <= SIZE; j += i) { //배수에 소수(i) 저장
-                if (prime[j] == j) { //저장된 소수가 없을 경우만
-                    prime[j] = i; //소수 저장
-                }
+    // n 이하의 수를 소인수분해하는 경로를 리턴
+    for (int i = 2; i * i <= MAX; i++) {
+        // 소수가 아니면 continue
+        if (prime[i] != 0) {
+            continue;
+        }
+        // i가 소수라면
+        // i부터 i*(i-1)은 이미 앞선 소수들에 의해 지워졌음.
+        for (int j = i * i; j <= MAX; j += i) { //배수에 소수(i) 저장
+            if (prime[j] == 0) {
+                prime[j] = i; 
             }
         }
     }
@@ -27,17 +28,19 @@ void isPrime() {
 
 //소인수분해해서 지수 계산하는 함수
 void countExponent(int a, int cnt) {
-    while (a > 1) { //소인수분해, prime[a] = 소인수
+    while (prime[a]) { //소인수분해, prime[a] = 소인수
         exponent[prime[a]] += cnt; //연산이 곱하기라면 cnt = 1 이여서 지수 증가, 나누기라면 cnt = -1로 지수 감소
         a = a / prime[a];
     }
+    exponent[a] += cnt; //마지막 남은 소수
 }
 
 //연산이 끝난 후, 소인수의 지수에 음수 있는지 판단 -> 있다면 유리수 -> true 리턴
 bool isRationalNumber() {
-    for (int i = 2; i <= SIZE; i++) {
-        if (exponent[i] < 0) //유리수라면
+    for (int i = 2; i <= MAX; i++) {
+        if (exponent[i] < 0) { //유리수라면
             return true;
+        }
     }
     return false;
 }
@@ -80,16 +83,20 @@ int main() {
             return 0;
         }
 
-        if (c == '*') //곱하기라면 -> 지수 증가
+        if (c == '*') { //곱하기라면 -> 지수 증가
             countExponent(abs(a), 1); //2번째 매개변수: 지수의 증가값
-        else //나누기라면 -> 지수 감소
+        }
+        else { //나누기라면 -> 지수 감소
             countExponent(abs(a), -1); //2번째 매개변수: 지수의 감소값
+        }
     }
 
-    if (isRationalNumber()) //유리수인 경우
+    if (isRationalNumber()) { //유리수인 경우
         cout << "toothpaste\n";
-    else //0 제외 정수인 경우
+    }
+    else { //0 제외 정수인 경우
         cout << "mint chocolate\n";
+    }
 
     return 0;
 }
