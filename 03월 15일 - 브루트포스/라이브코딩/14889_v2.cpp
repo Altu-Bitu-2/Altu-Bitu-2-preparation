@@ -57,16 +57,7 @@ int calcDiff(int n, vector<bool> &is_teamA) {
     return diff;    // 절댓값 리턴
 }
 
-int main() {
-    int n;
-    // 입력
-    cin >> n;
-    power.assign(n, vector<int>(n, 0));
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cin >> power[i][j];
-        }
-    }
+int findMinDiff(int n){
     // 조합을 구하기 위해 임시 배열 만들기
     // is_teamA[i] : i가 teamA에 속하는지 여부를 저장
     vector<bool> is_teamA(n, true);
@@ -82,7 +73,21 @@ int main() {
         answer = min(answer, calcDiff(n, is_teamA));
     } while ((next_permutation(is_teamA.begin() + 1, is_teamA.end()))); // 두번씩 계산되는걸 방지하기 위해, 0번은 false로 고정
 
-    cout << answer;
-    return 0;
+    return answer;
 }
 
+int main() {
+    int n;
+    // 입력
+    cin >> n;
+    power.assign(n, vector<int>(n, 0));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> power[i][j];
+        }
+    }
+
+    // 연산 + 출력
+    cout << findMinDiff(n);
+    return 0;
+}
