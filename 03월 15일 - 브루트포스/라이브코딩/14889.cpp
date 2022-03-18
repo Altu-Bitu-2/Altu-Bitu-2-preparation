@@ -3,7 +3,9 @@
 #include <algorithm>
 
 using namespace std;
-vector<vector<int>> skill;
+vector<vector<int>> power;
+
+const int MAX_DIFF = 1000; // 100 (개인 능력치 최대) * 10 (n/2의 최댓값) = 1000
 
 // 조합 구하기
 // (튜터용) - next_permutaion, prev_permutation 순서대로 출력하면서 보여줄 예정입니다.
@@ -23,31 +25,39 @@ void combination() {
 
 }
 
-// teamA에 속하는지를 저장한 벡터를 받아 능력치의 차이를 구하는 함수
+int sumPower(vector<int> &team) {
+    int sum = 0; // 능력치 합 저장할 변수
+    int size = team.size();
+
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            sum += power[team[i]][team[j]] + power[team[j]][team[i]];
+        }
+    }
+//    cout << sum << ' '; // 디버깅용
+    return sum;
+}
+
 int calcDiff(int n, vector<bool> &is_teamA) {
+    // 임시배열을 이용하여 팀 나누기
     vector<int> teamA;  // A에 속한 인덱스를 저장
     vector<int> teamB;  // B에 속한 인덱스를 저장
 
-    int sumA, sumB;     // A, B의 각 능력치 합
-
+    // cout << "teamA : "; // 디버깅용
     for (int i = 0; i < n; i++) {
         if (is_teamA[i]) {
-            for (auto j: teamA) {
-                // 기존에 있던 팀원과 함께할 때 능력치를 더해줌
-                sumA += skill[i][j] + skill[j][i];
-            }
             teamA.push_back(i); // 팀에 추가
+            // cout << i << ' ';   // 디버깅용
         } else {
-            for (auto j: teamB) {
-                sumB += skill[i][j] + skill[j][i];
-            }
             teamB.push_back(i); // 팀에 추가
         }
     }
-    return abs(sumA - sumB);    // 절댓값 리턴
+    int diff = abs(sumPower(teamA) - sumPower(teamB));
+//    cout << diff << '\n';   // 디버깅용
+    return diff;    // 절댓값 리턴
 }
 
-int make_team(int n) {
+int findMinDiff(int n){
     // 조합을 구하기 위해 임시 배열 만들기
     // is_teamA[i] : i가 teamA에 속하는지 여부를 저장
     vector<bool> is_teamA(n, true);
@@ -56,12 +66,13 @@ int make_team(int n) {
         is_teamA[i] = false;
     }
 
-    int answer = 1000;      // 100 (개인 능력치 최대) * 10 (n/2의 최댓값) = 1000
+    int answer = MAX_DIFF;
 
     do {
         // 각 팀의 능력치 차이의 최솟값을 갱신
         answer = min(answer, calcDiff(n, is_teamA));
     } while ((next_permutation(is_teamA.begin() + 1, is_teamA.end()))); // 두번씩 계산되는걸 방지하기 위해, 0번은 false로 고정
+
     return answer;
 }
 
@@ -69,12 +80,14 @@ int main() {
     int n;
     // 입력
     cin >> n;
-    skill.assign(n, vector<int>(n, 0));
+    power.assign(n, vector<int>(n, 0));
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            cin >> skill[i][j];
+            cin >> power[i][j];
         }
     }
-    cout << make_team(n);
+
+    // 연산 + 출력
+    cout << findMinDiff(n);
     return 0;
 }
