@@ -13,8 +13,8 @@ vector<int> simulation(int k, queue<int> &q) {
         q.pop();
         cnt++;
         if (cnt == k) { //k번째 pop하는 원소라면
-            result.push_back(x); //요세푸스 순열에 저장
-            cnt = 0; //카운트 초기화
+            result.push_back(x);
+            cnt = 0;
             continue;
         }
         q.push(x); //pop한 원소 다시 push

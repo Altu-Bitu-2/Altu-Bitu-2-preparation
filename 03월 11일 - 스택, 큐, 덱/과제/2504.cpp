@@ -19,16 +19,16 @@ int calc(string s) {
     int ans = 0, temp = 1;
     for (int i = 0; i < s.length(); i++) {
         switch (s[i]) {
-            case '(': case '[':
+            case '(': case '[': //여는 괄호일 경우
                 st.push(s[i]);
-                temp *= num[s[i]]; //여는 괄호 시 곱하기
+                temp *= num[s[i]];
                 break;
-            case ')': case ']':
-                if (st.empty() || st.top() != bracket[s[i]]) { //올바르지 않은 괄호
+            case ')': case ']': //닫는 괄호일 경우
+                if (st.empty() || st.top() != bracket[s[i]]) {
                     return 0;
                 }
-                if (s[i - 1] == bracket[s[i]]) { //바로 전이 여는 괄호였을 경우
-                    ans += temp; //곱한 값을 저장
+                if (s[i - 1] == bracket[s[i]]) {
+                    ans += temp;
                 }
                 temp /= num[bracket[s[i]]]; //이미 값을 더한 경우이므로 나누기
                 st.pop();
@@ -45,7 +45,7 @@ int calc(string s) {
  * "분배법칙"을 활용!
  * ex. ([]([])): 2 x (3 + 2 x 3) == 2 x 3 + 2 x 2 x 3
  * =>                               (   [ ]     (   [   ]   )   )
- * =>                   임시변수값: 2   6 2     4  12   4   2   1
+ * =>                   임시변수값:  2   6 2     4  12   4   2   1
  * =>                        정답:        +6           +12        = 18
  *
  * 따라서, 우선 여는 괄호가 나오면 괄호의 값을 곱해줌
