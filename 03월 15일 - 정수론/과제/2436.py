@@ -31,8 +31,8 @@ for i in range(int(root_ab), 0, -1):
     a = i
     b = ab // i
 
-    # a와 b가 서로소인지 확인
-    if calc_gcd(max(a, b), min(a, b)) == 1:
+    # a와 b가 서로소인지 확인 - a는 항상 b보다 작다
+    if calc_gcd(b, a) == 1:
         break
 
 print(a * gcd, b * gcd)
