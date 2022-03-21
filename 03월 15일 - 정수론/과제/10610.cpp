@@ -1,27 +1,27 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 
 using namespace std;
 
-vector<int> findNumber(string s) {
-    vector<int> num(s.length(), 0);
+string findNumber(string s) {
     bool isTen = false; //0이 존재하는지 확인
     int sum = 0; //3의 배수인지 확인하기 위해 수 더함
 
     //돌면서 3의 배수와 10의 배수인지 확인
     for (int i = 0; i < s.length(); i++) {
-        num[i] = s[i] - '0';
-        sum += num[i];
-        if (num[i] == 0) {
+        sum += (s[i] - '0');
+        if (s[i] == '0') {
             isTen = true;
         }
     }
 
     if (sum % 3 != 0 || !isTen) { //3의 배수가 아니거나, 10의 배수가 아니라면
-        return {-1};
+        return "-1";
     }
-    return num;
+
+    //가장 큰 수 만들기 위해 내림차순 정렬
+    sort(s.begin(), s.end(), greater<>());
+    return s;
 }
 
 /**
@@ -40,18 +40,7 @@ int main() {
     //입력
     cin >> s;
 
-    //연산
-    vector<int> num = findNumber(s);
-    //출력
-    if (num[0] == -1) {
-        cout << "-1\n";
-    } else {
-        //가장 큰 수 만들기 위해 내림차순 정렬
-        sort(num.begin(), num.end(), greater<>());
-
-        for (int i = 0; i < num.size(); i++) {
-            cout << num[i];
-        }
-    }
+    //연산 & 출력
+    cout << findNumber(s);
     return 0;
 }
