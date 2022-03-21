@@ -1,12 +1,17 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
 /*
  * 톱니바퀴 문제
+ *
  * 문제에 나와있는대로 구현
+ * -> 맞닿은 극이 "다를 경우" 우선 해당 톱니 회전 후, 맞닿은 톱니 반대 방향으로 회전
+ * -> 이때 맞닿은 극을 확인하는 경우는 회전 후가 아닌 회전 전!!
+ *
  * 톱니바퀴의 상태를 저장할 컨테이너 -> 덱
  *
  * 1. 각 톱니바퀴가 회전할 방향을 결정
@@ -56,6 +61,14 @@ void rotate() {
     return;
 }
 
+int calcScore(){
+    int answer = 0;
+    for (int i = 1; i <= 4; i++) {
+        answer += pow(2, i) * wheel[i][0];
+    }
+    return answer;
+}
+
 int main() {
     string temp;
     for (int i = 1; i <= 4; i++) {
@@ -77,12 +90,6 @@ int main() {
     }
 
     // 점수를 계산
-    int answer = 0;
-    int weight = 1;
-    for (int i = 1; i <= 4; i++) {
-        answer += weight * wheel[i][0];
-        weight *= 2;
-    }
-    cout << answer;
+    cout << calcScore();
     return 0;
 }
