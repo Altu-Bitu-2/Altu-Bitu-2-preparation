@@ -11,8 +11,7 @@ input = sys.stdin.readline
 
 def is_group_word(word):
     checked = set()
-    prev = word[0]
-    checked.add(word[0])
+    prev = None
 
     for c in word:
         if c == prev:

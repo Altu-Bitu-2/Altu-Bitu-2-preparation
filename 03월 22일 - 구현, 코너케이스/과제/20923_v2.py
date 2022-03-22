@@ -12,6 +12,15 @@ input = sys.stdin.readline
 2. 누군가의 카드 덱이 비는 즉시 게임 종료
 3. 종을 치면, 상대방의 그라운드 카드를 뒤집어서 카드 더미의 밑에 넣는다.
 """
+def move_cards(card, ground):
+    # index 에러 방지 -1 제거
+    card.popleft()
+
+    while (ground):
+        card.appendleft(ground.popleft())
+    
+    ground.append(-1) # 인덱스 방지 -1 다시 추가
+    return
 
 def play_game(cards, ground):
     player = 0
@@ -34,17 +43,8 @@ def play_game(cards, ground):
         else:
             continue
 
-        temp = 1 - hit  # 옮길 그라운드의 번호
-
-        for _ in range(2):
-            # index 에러 방지 -1 제거
-            ground[temp].popleft()
-
-            while (ground[temp]):
-                cards[hit].appendleft(ground[temp].popleft())
-            
-            ground[temp].append(-1) # 인덱스 방지 -1 다시 추가
-            temp = 1 - temp
+        move_cards(cards[hit], ground[1 - hit])
+        move_cards(cards[hit], ground[hit])
         
     if len(cards[0]) > len(cards[1]):
         return 0
