@@ -61,10 +61,10 @@ void rotate() {
     return;
 }
 
-int calcScore(){
+int calcScore() {
     int answer = 0;
     for (int i = 1; i <= 4; i++) {
-        answer += pow(2, i) * wheel[i][0];
+        answer += pow(2, i - 1) * wheel[i][0];
     }
     return answer;
 }
