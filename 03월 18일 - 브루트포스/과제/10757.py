@@ -27,11 +27,8 @@ def calcPlus(a, b):
         ans[i-1] = ans[i] // 10
         ans[i] %= 10
 
-    # 맨 앞자리 0이 출력되지 않도록
-    if ans[0] == 0:
-        return ''.join(map(str, ans[1:]))
-
-    return ''.join(map(str, ans))
+    # 맨 앞자리 0이 출력되지 않도록 int() 적용
+    return int(''.join(map(str, ans)))
 
 # 입력
 a, b = input().split()

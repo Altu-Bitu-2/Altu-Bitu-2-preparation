@@ -25,11 +25,9 @@ def count_strike_ball(s1, s2):
 
     return (strike, ball)
 
-def play_game(questions)
-    digits = ""
-    for i in range(1, 10):
-        digits += str(i)
-    
+# 반복문으로 직접 경우의 수 구하는 함수
+def play_game(questions):
+
     answer = 0
 
     for i in range(123, 987 + 1):
@@ -50,10 +48,9 @@ def play_game(questions)
 
     return answer
 
+# permutation 이용해서 경우의 수 구하는 함수
 def play_game_with_permutations(questions):
-    digits = ""
-    for i in range(1, 10):
-        digits += str(i)
+    digits = [str(i) for i in range(1, 10)]
     
     answer = 0
 
@@ -73,4 +70,4 @@ initialize_input = lambda x: (x[0], (int(x[1]), int(x[2])))
 questions = [initialize_input(input().split()) for _ in range(n)]
 
 # 연산 + 출력
-print(play_game(questions))
+print(play_game_with_permutations(questions))
