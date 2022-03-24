@@ -8,9 +8,9 @@ using namespace std;
 map<char, bool> vowels; //모음 저장 맵
 
 //조합 임시배열로 문자열을 만드는 함수
-string charToString(vector<char> &alphabet, vector<bool> &is_in_password) {
+string charToString(int c, vector<char> &alphabet, vector<bool> &is_in_password) {
     string result = "";
-    for (int i = 0; i < is_in_password.size(); i++) {
+    for (int i = 0; i < c; i++) {
         if (is_in_password[i]) { //연산에 포함된 문자라면 result에 더하기
             result += alphabet[i];
         }
@@ -42,7 +42,7 @@ vector<string> findPassword(int l, int c, vector<char> &alphabet) {
     }
     do {
         if (isValid(l, c, alphabet, is_in_password)) { //암호 만들기 가능하다면
-            result.push_back(charToString(alphabet, is_in_password));
+            result.push_back(charToString(c, alphabet, is_in_password));
         }
     } while (prev_permutation(is_in_password.begin(), is_in_password.end()));
 
