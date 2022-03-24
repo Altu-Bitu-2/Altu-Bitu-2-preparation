@@ -5,27 +5,30 @@
 using namespace std;
 
 int findMinNumber(int n, int num_size, vector<int> &square_num) {
-    int ans = 4;
-    for (int i = num_size - 1; i >= 0; i--) {
-        if (square_num[i] == n) {
-            return 1; //1일 경우 확실히 최소니까 바로 리턴
-        }
+    if (square_num[num_size - 1] == n) { //1개로 만들 수 있을 경우 바로 리턴
+        return 1;
+    }
+    for (int i = num_size - 1; i >= 0; i--) { //2개로 만들 수 있는 경우 검사
         for (int j = num_size - 1; j >= 0; j--) {
             if (square_num[i] + square_num[j] == n) {
-                ans = 2;
+                return 2;
             }
+        }
+    }
+    for (int i = num_size - 1; i >= 0; i--) { //3개로 만들 수 있는 경우 검사
+        for (int j = num_size - 1; j >= 0; j--) {
             for (int k = num_size - 1; k >= 0; k--) {
                 if (square_num[i] + square_num[j] + square_num[k] == n) {
-                    ans = min(ans, 3);
+                    return 3;
                 }
             }
         }
     }
-    return ans;
+    return 4;
 }
 
 /**
- * [Four Squares] - 브루트포스 풀이 (20ms)
+ * [Four Squares] - 브루트포스 풀이 (8ms)
  * 자연수 n에 대해 최소 몇개의 제곱수의 합으로 표현할 수 있는지 찾는 문제
  * 미리 최댓값까지의 제곱수를 구해놓고, 완전탐색
  *
