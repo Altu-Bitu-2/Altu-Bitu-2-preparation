@@ -16,7 +16,7 @@ bool isMakeNumber(int cnt, int sum, int m) { //cnt: 고른 개수, sum: 지금�
         }
         return false;
     }
-    for (int i = num_size; i >= 0; i--) {
+    for (int i = num_size - 1; i >= 0; i--) {
         if (sum + square_num[i] <= n) {
             check = isMakeNumber(cnt + 1, sum + square_num[i], m);
             if (check) { //m개의 제곱수의 합 표현 가능
