@@ -34,7 +34,7 @@ int game(int n, vector<baseball> &question) {
         string s1 = "000"; //정답인지 확인할 수
         for (int i = 1; i <= 9; i++) {
             if (is_in_num[i]) {
-                s1[is_in_num[i] - 1] = i + '0';
+                s1[is_in_num[i] - 1] = i + '0'; //각 순서에 따라 숫자 저장
             }
         }
         for (int i = 0; i < n; i++) {
