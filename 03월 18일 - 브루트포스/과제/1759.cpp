@@ -7,11 +7,11 @@ using namespace std;
 
 map<char, bool> vowels; //모음 저장 맵
 
-//문자 배열을 문자열로 만드는 함수
-string charToString(vector<char> &alphabet, vector<bool> &is_password) {
+//조합 임시배열로 문자열을 만드는 함수
+string charToString(vector<char> &alphabet, vector<bool> &is_in_password) {
     string result = "";
-    for (int i = 0; i < is_password.size(); i++) {
-        if (is_password[i]) { //연산에 포함된 문자라면 result에 더하기
+    for (int i = 0; i < is_in_password.size(); i++) {
+        if (is_in_password[i]) { //연산에 포함된 문자라면 result에 더하기
             result += alphabet[i];
         }
     }
@@ -19,11 +19,11 @@ string charToString(vector<char> &alphabet, vector<bool> &is_password) {
 }
 
 //암호 만들기 가능한지 확인하는 함수 (최소 모음 1개, 최소 자음 2개)
-bool isValid(int l, int c, vector<char> &alphabet, vector<bool> &is_password) {
+bool isValid(int l, int c, vector<char> &alphabet, vector<bool> &is_in_password) {
     int cnt_vowels = 0;
     //자음 개수는 암호 전체 길이에서 모음 개수를 빼서 알 수 있음
     for (int i = 0; i < c; i++) {
-        if (!is_password[i]) { //암호에 속하지 않았다면
+        if (!is_in_password[i]) { //암호에 속하지 않았다면
             continue;
         }
         if (vowels[alphabet[i]]) { //모음이라면
@@ -36,15 +36,15 @@ bool isValid(int l, int c, vector<char> &alphabet, vector<bool> &is_password) {
 //조합 구하기
 vector<string> findPassword(int l, int c, vector<char> &alphabet) {
     vector<string> result;
-    vector<bool> is_password(c, false);
+    vector<bool> is_in_password(c, false);
     for (int i = 0; i < l; i++) { //미리 l개의 true 저장
-        is_password[i] = true;
+        is_in_password[i] = true;
     }
     do {
-        if (isValid(l, c, alphabet, is_password)) { //암호 만들기 가능하다면
-            result.push_back(charToString(alphabet, is_password));
+        if (isValid(l, c, alphabet, is_in_password)) { //암호 만들기 가능하다면
+            result.push_back(charToString(alphabet, is_in_password));
         }
-    } while (prev_permutation(is_password.begin(), is_password.end()));
+    } while (prev_permutation(is_in_password.begin(), is_in_password.end()));
 
     return result;
 }
