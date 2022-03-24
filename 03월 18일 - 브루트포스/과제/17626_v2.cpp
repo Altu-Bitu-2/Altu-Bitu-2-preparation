@@ -7,7 +7,7 @@ using namespace std;
 int n, num_size;
 vector<int> square_num;
 
-bool isMakeNumber(int cnt, int sum, int m) { //cnt: 고른 개수, sum: 지금까지 합, m: 골라야 하는 개수
+bool isPossible(int cnt, int sum, int m) { //cnt: 고른 개수, sum: 지금까지 합, m: 골라야 하는 개수
     bool check = false; //m개의 제곱수 합 표현 가능한지
 
     if (cnt == m) { //다 골랐다면
@@ -18,7 +18,7 @@ bool isMakeNumber(int cnt, int sum, int m) { //cnt: 고른 개수, sum: 지금�
     }
     for (int i = num_size - 1; i >= 0; i--) {
         if (sum + square_num[i] <= n) {
-            check = isMakeNumber(cnt + 1, sum + square_num[i], m);
+            check = isPossible(cnt + 1, sum + square_num[i], m);
             if (check) { //m개의 제곱수의 합 표현 가능
                 return true;
             }
@@ -49,7 +49,7 @@ int main() {
     //3개의 조합까지만 구함
     int ans = 4; //우선 4로 초기화
     for (int i = 1; i <= 3; i++) {
-        if (isMakeNumber(0, 0, i)) { //정답 생기면
+        if (isPossible(0, 0, i)) { //정답 생기면
             ans = i;
             break;
         }
