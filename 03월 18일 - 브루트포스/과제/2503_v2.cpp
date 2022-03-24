@@ -27,10 +27,7 @@ ci cntStrikeBall(string &s1, string &s2) {
 
 int game(int n, vector<baseball> &question) {
     int ans = 0; //정답 개수
-    vector<int> is_in_num(10, 0); //1 ~ 9까지 숫자
-    for (int i = 7; i <= 9; i++) {
-        is_in_num[i] = i - 6; //순서 저장
-    }
+    vector<int> is_in_num = {0, 0, 0, 0, 0, 0, 0, 1, 2, 3}; //7부터 9번 인덱스까지 순서 저장
 
     do {
         bool check = true;
