@@ -17,10 +17,7 @@ def is_valid(cypher):
             count += 1
 
     # 모음 한개 이상, 자음 2개 이상
-    if count >= 1 and len(cypher) - count >= 2:
-        return True
-
-    return False
+    return count >= 1 and len(cypher) - count >= 2
 
 # 입력
 n, m = map(int, input().split())
