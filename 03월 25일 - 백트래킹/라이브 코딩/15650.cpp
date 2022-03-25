@@ -1,11 +1,11 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
-
 const int SIZE = 8;
 
 int n, m;
-int num[SIZE]; //수열
+vector<int> num(SIZE); //수열
 
 //재귀함수로 구현한 백트래킹
 void backtracking(int cnt, int start) { //start: 오름차순 구현을 위한 시작 인덱스
@@ -28,6 +28,5 @@ int main() {
 
     //연산 + 출력
     backtracking(0, 1);
-
     return 0;
 }

@@ -1,13 +1,13 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
-
 const int SIZE = 15;
 
 int n, ans;
-bool check_col[SIZE]; //열 체크
-bool check_left[SIZE * 2]; //좌하향 대각선 체크
-bool check_right[SIZE * 2]; //우하향 대각선 체크
+vector<bool> check_col(SIZE); //열 체크
+vector<bool> check_left(SIZE * 2); //좌하향 대각선 체크
+vector<bool> check_right(SIZE * 2); //우하향 대각선 체크
 
 void backtracking(int row) { //row: 행
     if (row == n) { //기저조건, n개의 퀸이 모두 놓임
@@ -49,6 +49,5 @@ int main() {
 
     //출력
     cout << ans << '\n';
-
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -6,8 +7,8 @@ const int SIZE = 8;
 
 //재귀함수 사용 시, 함수를 계속 호출할 때 매개변수도 생성되므로 전역변수로 선언하는 것이 더 효율적
 int n, m;
-int num[SIZE]; //수열
-bool check[SIZE]; //수 사용 체크 배열
+vector<int> num(SIZE); //수열
+vector<bool> check(SIZE); //수 사용 체크 배열
 
 //재귀함수로 구현한 백트래킹
 void backtracking(int cnt) { //cnt: 수열의 인덱스
@@ -35,6 +36,5 @@ int main() {
 
     //연산 + 출력
     backtracking(0);
-
     return 0;
 }

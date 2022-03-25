@@ -1,10 +1,11 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 const int SIZE = 15;
 
 int n, ans;
-int check[SIZE];
+vector<int> check(SIZE);
 
 bool promising(int num) {
     int idx = 0;
