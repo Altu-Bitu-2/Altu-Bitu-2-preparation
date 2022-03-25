@@ -27,7 +27,7 @@ int main() {
             }
         }
         cout << '\n';
-    } while (prev_permutation(is_in_num.begin() + 1, is_in_num.end()));
+    } while (prev_permutation(is_in_num.begin() + 1, is_in_num.end())); //인덱스 1부터 사용
 
     return 0;
 }
