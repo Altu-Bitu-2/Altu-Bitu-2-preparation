@@ -35,30 +35,28 @@ while True:
     
     robots[down_idx] = False
 
+    prev_idx = down_idx
     idx = down_idx - 1
-
+    
     while idx != up_idx:
-        next_idx = (idx + 1) % size
-        if robots[idx] and not robots[next_idx] and belt[next_idx] > 0:
+        if robots[idx] and not robots[prev_idx] and belt[prev_idx] > 0:
             robots[idx] = False
-            robots[next_idx] = True
-            belt[next_idx] -= 1
-            if belt[next_idx] == 0:
+            robots[prev_idx] = True
+            belt[prev_idx] -= 1
+            if belt[prev_idx] == 0:
                 k -= 1
-                if k <= 0:
-                    break
+        prev_idx = idx
         idx = (idx - 1) % size
+
     robots[down_idx] = False
 
-    if k <= 0:
-        break
-
-    if not robots[up_idx] and belt[up_idx] > 0:
+    if belt[up_idx] > 0:
         robots[up_idx] = True
         belt[up_idx] -= 1
         if belt[up_idx] == 0:
             k -= 1
-            if k <= 0:
-                break
+
+    if k <= 0:
+        break
 
 print(step)
