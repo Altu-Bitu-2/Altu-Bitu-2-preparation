@@ -14,8 +14,9 @@ def move_cards(card, ground):
     # index 에러 방지 -1 제거
     ground.popleft()
 
-    while (ground):
-        card.appendleft(ground.popleft())
+    # deque.extendleft(arr): arr에 있는 값을 하나씩 빼서 왼쪽에 삽입한다.
+    card.extendleft(ground)
+    ground.clear()
 
     ground.append(-1) # 인덱스 방지 -1 다시 추가
     return
@@ -36,7 +37,7 @@ def play_game(cards, ground):
 
         if ground[0][-1] == 5 or ground[1][-1] == 5:
             hit = 0     # 도도
-        elif (ground[0][-1] + ground[1][-1] == 5):
+        elif ground[0][-1] + ground[1][-1] == 5:
             hit = 1     # 수연
         else:
             continue
