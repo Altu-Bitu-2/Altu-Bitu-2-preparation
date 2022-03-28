@@ -47,7 +47,7 @@ int main() {
             continue;
         }
         if (cmd == "check") {
-            cout << s[num] << '\n';
+            cout << s[num] << '\n'; //bool 형을 출력하면 true: 1, false: 0으로 출력
             continue;
         }
         if (cmd == "toggle") {

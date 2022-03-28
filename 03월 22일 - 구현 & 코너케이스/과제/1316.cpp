@@ -4,7 +4,7 @@
 using namespace std;
 
 bool isGroup(string str) {
-    char cur = '.'; //현재의 문자
+    char cur = NULL; //현재의 문자
     vector<bool> alphabet(26, false); //각 알파벳의 등장 여부를 체크
 
     for (int i = 0; i < str.size(); i++) {
