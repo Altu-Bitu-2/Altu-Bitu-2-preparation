@@ -5,6 +5,8 @@
 using namespace std;
 
 /**
+ * 1.
+ *
  * 강의자료 점화식
  *
  * 시간 복잡도 O(n^2)
@@ -25,10 +27,16 @@ int lis(int n, vector<int> &arr) {
 }
 
 /**
+ * 2.
+ *
  * dp[i] : 증가하는 부분 수열의 길이가 i인 수 중에 가장 작은 수
  * idx : 가장 긴 증가하는 부분 수열의 길이
  *
  * 시간 복잡도 O(nk) (k는 idx의 크기)
+ *
+ * -> k가 n이 될 수 있으므로 이론상 시간복잡도는 O(n^2)으로 동일하지만,
+ *    증가하는 관계일 때 break를 해줌으로써 실제 연산횟수는 더 적어서 1번 함수보다 빠른 풀이
+ *
  * 해설 : https://myunji.tistory.com/214
  */
 int lisAdv(int n, vector<int> &arr) {
@@ -50,6 +58,8 @@ int lisAdv(int n, vector<int> &arr) {
 }
 
 /**
+ * 3.
+ *
  * lisAdv에서 line 36~43의 과정을 이분탐색으로 구현
  *
  * 시간 복잡도 O(nlogk) (k는 dp의 크기)
