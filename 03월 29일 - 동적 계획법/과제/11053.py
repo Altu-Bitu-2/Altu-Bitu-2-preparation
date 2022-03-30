@@ -4,7 +4,7 @@ input = sys.stdin.readline
 
 def lis(n, arr):
     """
-    1. lis() -> 시간 복잡도 O(n^2)
+    시간 복잡도 O(n^2)
 
     강의 자료 점화식 참고
     """
@@ -23,6 +23,7 @@ def lis2(n, arr):
     idx : 가장 긴 증가하는 부분 수열의 길이
 
     시간 복잡도 O(nk) (k는 idx의 크기)
+    -> k가 n이 될 수 있으므로 이론상 시간복잡도는 O(n^2)으로 동일하지만, 증가하는 관계일 때 break를 해줌으로써 실제 연산횟수는 더 적어서 1번 함수보다 빠른 풀이
     해설 : https://myunji.tistory.com/214
     """
     dp = [0]*(n+1)
@@ -42,7 +43,7 @@ def lis2(n, arr):
 
     return size
 
-def lis_adv(n, arr):
+def lis_adv(arr):
     """
     lisAdv에서 line 36~43의 과정을 이분탐색으로 구현
     
@@ -67,4 +68,4 @@ arr = list(map(int, input().split()))
 # 연산 + 출력
 # print(lis(n, arr))
 # print(lis2(n, arr))
-print(lis_adv(n, arr))
+print(lis_adv(arr))
