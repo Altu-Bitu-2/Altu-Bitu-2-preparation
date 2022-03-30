@@ -1,11 +1,13 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 const int INF_MAX = 1e9;
+const int SIZE = 11;
 
 int n;
-int num[12];
-int expression[4]; //0: +, 1: -, 2: *, 3: /
+vector<int> num(SIZE + 1);
+vector<int> expression(4); //0: +, 1: -, 2: *, 3: /
 int max_value = -INF_MAX, min_value = INF_MAX;
 
 void backtracking(int cnt, int sum) { //cnt: 수 인덱스, sum: 연산 결과

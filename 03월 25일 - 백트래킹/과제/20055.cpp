@@ -94,7 +94,6 @@ int main() {
     }
 
     //출력
-    cout << step << '\n';
-
+    cout << step;
     return 0;
 }

@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -8,12 +8,10 @@ int sudoku[MAX][MAX];         //스도쿠 정보
 bool check_row[MAX][MAX + 1]; //각 행의 숫자 존재 여부 체크
 bool check_col[MAX][MAX + 1]; //각 열의 숫자 존재 여부 체크
 bool check_3x3[MAX][MAX + 1]; //각 3x3 사각형의 숫자 존재 여부 체크
-bool found = false;           //스도쿠 채웠는지 확인
 
-void fillSudoku(int idx) {
-    if (idx == MAX * MAX) {
-        found = true;
-        return;
+bool fillSudoku(int idx) {
+    if (idx == MAX * MAX) { //스도쿠 모두 채움 (기저 조건)
+        return true;
     }
     int row = idx / MAX;
     int col = idx % MAX;
@@ -28,9 +26,8 @@ void fillSudoku(int idx) {
             check_col[col][i] = true;
             check_3x3[(row / 3) * 3 + col / 3][i] = true;
             sudoku[row][col] = i;
-            fillSudoku(idx + 1);
-            if (found) { //생각해보기 : 이 부분이 없으면 어떻게 될까요?
-                return;
+            if (fillSudoku(idx + 1)) {
+                return true; //생각해보기 : 이 부분이 없으면 어떻게 될까요?
             }
             check_row[row][i] = false;
             check_col[col][i] = false;
@@ -38,6 +35,7 @@ void fillSudoku(int idx) {
             sudoku[row][col] = 0;
         }
     }
+    return false;
 }
 
 /**
@@ -78,8 +76,9 @@ int main() {
 
     //출력
     for (int i = 0; i < MAX; i++) {
-        for (int j = 0; j < MAX; j++)
+        for (int j = 0; j < MAX; j++) {
             cout << sudoku[i][j] << ' ';
+        }
         cout << '\n';
     }
     return 0;

@@ -1,13 +1,15 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
 const int SIZE = 8; //배열 크기
 
 int n, m;
-int num[SIZE], ans[SIZE];
-bool check[SIZE];
+vector<int> num(SIZE);
+vector<int> ans(SIZE);
+vector<bool> check(SIZE);
 
 void backtracking(int cnt) {
     if (cnt == m) { //길이 m 이라면 (기저조건)
@@ -44,7 +46,7 @@ int main() {
     }
 
     //연산
-    sort(num, num + n);
+    sort(num.begin(), num.begin() + n);
 
     //백트래킹 & 출력
     backtracking(0);
