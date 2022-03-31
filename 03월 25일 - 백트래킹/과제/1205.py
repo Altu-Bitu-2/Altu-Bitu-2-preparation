@@ -32,7 +32,7 @@ else:
     first_idx = scores.index(new_score)
 
     # 동점자가 몇 명 있는지 구하기
-    same_score = scores.find(new_score)
+    same_score = scores.count(new_score)
 
     if first_idx + same_score <= p:
         answer = first_idx + 1
