@@ -10,13 +10,13 @@ input = sys.stdin.readline
 MAX = 10**8
 
 # curr_city: 현재 도시의 index, left: 남은 도시의 수, cost: 현재까지의 경비
-def backtracking(curr_city, left, cost):
+def backtracking(count, curr_city, cost):
     global answer   # 전역변수 answer 업데이트 필요
     
     if cost > answer:   # 생각해보기 : 이 조건문이 없으면 어떻게 될까요?
         return
 
-    if left == 0:   # 모든 도시를 다 방문했다면 0(출발도시)으로 돌아올 수 있는지 확인
+    if count == n - 1:   # 모든 도시를 다 방문했다면 0(출발도시)으로 돌아올 수 있는지 확인
         if matrix[curr_city][0] > 0:
             answer = min(answer, cost + matrix[curr_city][0])
         return
@@ -25,7 +25,7 @@ def backtracking(curr_city, left, cost):
         if visited[next_city] or matrix[curr_city][next_city] == 0:
             continue
         visited[next_city] = True
-        backtracking(next_city, left - 1, cost + matrix[curr_city][next_city])
+        backtracking(count + 1, next_city, cost + matrix[curr_city][next_city])
         visited[next_city] = False
 
     return
@@ -39,5 +39,5 @@ visited = [False] * n
 answer = MAX
 
 visited[0] = True
-backtracking(0, n - 1, 0)   # 0에서 출발해 n - 1개 도시를 방문
+backtracking(0, 0, 0)   # 0에서 출발해 n - 1개 도시를 방문
 print(answer)
