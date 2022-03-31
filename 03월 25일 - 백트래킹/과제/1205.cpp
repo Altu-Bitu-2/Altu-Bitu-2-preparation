@@ -7,7 +7,10 @@ int findRanking(int n, int new_score, int p, vector<int> &ranking) {
     int idx = 1;
     int ans = 1;
     //새로운 점수를 어느 위치에 넣을지 탐색
-    while (new_score <= ranking[idx] && idx <= n) {
+    while (idx <= n) {
+        if (new_score > ranking[idx]) {
+            break;
+        }
         if (new_score < ranking[idx]) {
             ans = idx + 1;
         }
