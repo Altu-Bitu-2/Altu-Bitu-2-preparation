@@ -9,9 +9,7 @@ int maxScore(int n, vector<int> &score) {
     if (n == 1) { //인덱스 에러 방지를 위해 n = 1일 경우 바로 리턴
         return score[1];
     }
-    if (n == 2) {
-        return score[1] + score[2];
-    }
+
     dp[1] = score[1]; //1번째 계단은 해당 칸 밟는게 최대
     dp[2] = score[1] + score[2]; //2번째 계단은 1번째와 2번째 밟는게 최대
     for (int i = 3; i <= n; i++) { //i번째 계단까지 경로 최댓값
