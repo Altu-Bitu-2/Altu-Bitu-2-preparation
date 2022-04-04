@@ -9,9 +9,6 @@ int knapsack(int n, int m, vector<int> &coin) {
     dp[0] = 1;
     for (int i = 0; i < n; i++) {
         for (int j = coin[i]; j <= m; j++) {
-            if (!dp[j - coin[i]]) {
-                continue;
-            }
             dp[j] += dp[j - coin[i]];
         }
     }
@@ -23,7 +20,7 @@ int knapsack(int n, int m, vector<int> &coin) {
  *
  * dp[0] = 1 을 넣고 시작 (0원을 만드는 경우의 수 1로 생각)
  * 각 동전마다 해당 동전부터 만들어야 하는 금액(m)까지 돌리면서 해당 동전을 사용하기 전 금액의 경우의 수와 현재 경우의 수를 더함
- * !주의! 이때, 해당 동전 사용하기 전 금액의 경우의 수가 0이면 금액을 만들 수 없는 경우이므로 더하면 안됨
+ * 해당 동전 사용하기 전 금액의 경우의 수가 0이면 금액을 만들 수 없는 경우이지만, 어차피 더해도 값 변화는 없으므로 따로 고려하지 않음
  */
 
 int main() {

@@ -2,16 +2,21 @@
 #include <vector>
 
 using namespace std;
+const int MOD = 10007;
 
 int fillTile(int n) {
     vector<int> dp(n + 1, 0);
+
+    if (n == 1) { //인덱스 에러 안나도록 n이 1일 경우 바로 리턴
+        return 1;
+    }
 
     //너비 1, 2인 타일 채우는 경우의 수 미리 초기화
     dp[1] = 1;
     dp[2] = 3;
     for (int i = 3; i <= n; i++) {
         dp[i] = dp[i - 1] + 2 * dp[i - 2];
-        dp[i] %= 10007;
+        dp[i] %= MOD; //구하는 과정에서 int 범위 초과할 수 있으므로 마지막에 한 번이 아니라 중간 중간 모듈러 연산을 해줘야 함
     }
     return dp[n];
 }
