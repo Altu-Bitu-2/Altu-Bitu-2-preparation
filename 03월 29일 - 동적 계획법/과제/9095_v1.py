@@ -26,7 +26,7 @@ def number_of_all_cases():
     return dp
 
 # 사전 연산
-dp = number_of_all_cases()   # 11까지 모든 경우의 수를 미리 구해 둠
+dp = number_of_all_cases()   # 10까지 모든 경우의 수를 미리 구해 둠
 
 # 입력
 t = int(input())
