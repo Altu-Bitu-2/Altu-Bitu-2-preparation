@@ -18,7 +18,7 @@ int main() {
     int n, k;
     // 입력
     cin >> n >> k;
-    vector<int> coin(n);
+    vector<int> coin(n, 0);
     for (int i = 0; i < n; i++) {
         cin >> coin[i];
     }

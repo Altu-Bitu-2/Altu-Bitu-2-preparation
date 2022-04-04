@@ -7,9 +7,6 @@ using namespace std;
 typedef pair<int, int> ci;
 
 int getMaxCount(int n, vector<ci> &meetings) {
-    // 빨리 끝나는 순서대로, 빨리 시작하는 순서대로 정렬
-    sort(meetings.begin(), meetings.end());
-
     int count = 0;  // 회의 개수
     int prev_end = 0;   // 직전 회의의 끝나는 시간
     for (int i = 0; i < n; i++) {
@@ -36,6 +33,8 @@ int main() {
     for (int i = 0; i < n; i++) {
         cin >> meetings[i].second >> meetings[i].first;
     }
+    // 빨리 끝나는 순서대로, 빨리 시작하는 순서대로 정렬
+    sort(meetings.begin(), meetings.end());
 
     cout << getMaxCount(n, meetings);
     return 0;

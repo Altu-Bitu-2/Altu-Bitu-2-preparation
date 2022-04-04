@@ -3,6 +3,13 @@
 
 using namespace std;
 
+/*
+* 1. 학생의 체육복 개수 표시
+* 2. 왼쪽 학생부터 양 옆의 학생에게 체육복을 빌릴 수 있을지 검사
+* !주의! 왼쪽 학생, 오른쪽 학생 둘 다 빌릴 수 있는 경우 왼쪽 학생한테 빌려야 다음 학생은 또 왼쪽 학생에게 빌릴 수 있게 됨
+* 3. 마지막으로 체육복이 1개 이상인 학생 개수 세주기
+*/
+
 int solution(int n, vector<int> lost, vector<int> reserve) {
     int answer = 0;
 
@@ -41,6 +48,5 @@ int main() {
     int n = 5;
 
     cout << solution(n, lost, reserve);
-
     return 0;
 }
