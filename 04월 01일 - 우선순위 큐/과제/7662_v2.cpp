@@ -5,6 +5,9 @@ using namespace std;
 
 /**
  * set 풀이
+ *
+ * set은 중복값이 제거되기 때문에 multiset을 이용하여 저장해야 함
+ * multiset 또한 값을 넣으면 정렬이 바로 되기 때문에 이후의 정렬 과정이 따로 필요 없음
  */
 int main() {
     ios::sync_with_stdio(false);
