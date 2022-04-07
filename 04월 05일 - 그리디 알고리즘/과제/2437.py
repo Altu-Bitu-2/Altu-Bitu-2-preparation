@@ -17,10 +17,9 @@ def find_unmeasurable(weight):
     scope = 0
 
     for w in weight:
-        if scope + 1 >= w:
-            scope += w
-        else:
+        if scope + 1 < w:
             return scope + 1
+        scope += w            
 
     return scope + 1
 
