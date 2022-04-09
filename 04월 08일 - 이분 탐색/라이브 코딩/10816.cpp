@@ -19,7 +19,7 @@ int lowerBound(int left, int right, int target, vector<int> &arr) {
     /**
      * left를 리턴하는 이유
      * break 직전 left와 right는 같은 곳을 가리킴
-     * 이 상태에서 mid가 가리키는 값은 target 이하이기 때문에 left 포인터가 이동하고 break
+     * 이 상태에서 mid가 가리키는 값은 target 미만이기 때문에 left 포인터가 이동하고 break
      * 이 때의 left값은 target이 되는 첫 지점으로 lower bound임
      */
     return left;
