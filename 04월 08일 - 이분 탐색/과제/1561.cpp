@@ -6,35 +6,56 @@ using namespace std;
 typedef long long ll;
 const ll INF = 6e10;
 
-ll peopleOrder(ll t, vector<int> &rides) {
-    ll order = 0;
+ll finalChildren(ll t, vector<int> &rides) {
+    ll child = 0;
     for (int i = 1; i < rides.size(); i++) {
-        order += (t / rides[i] + 1);
+        child += (t / rides[i] + 1);
     }
-    return order;
+    return child;
 }
 
 ll lowerSearch(ll left, ll right, ll target, vector<int> &rides) {
     while (left <= right) {
         ll mid = (left + right) / 2;
-        ll order = peopleOrder(mid, rides);
+        ll child = finalChildren(mid, rides);
 
-        if (order >= target) { //줄의 마지막 아이보다 더 뒤에 있는 아이라면
+        if (child >= target) { //줄의 마지막 아이보다 더 뒤에 있는 아이라면
             right = mid - 1;
         } else {
             left = mid + 1;
         }
     }
-    return left - 1;
+    return left;
+}
+
+int findRides(int n, int m, vector<int> &rides) {
+    ll t = lowerSearch(0, INF, n, rides);
+    ll child = finalChildren(t, rides);
+    for (int i = m; i >= 1; i--) {
+        if (t % rides[i] == 0) { //아이가 탐
+            if (child-- == n) {
+                return i;
+            }
+        }
+    }
 }
 
 /**
  * [놀이 공원]
  *
- * 놀이기구가 모두 비어 있는 상태에서 첫 번째 아이가 놀이기구에 탑승한다고 할 때, 줄의 마지막 아이가 타게 되는 놀이기구의 번호
- * f(t) += (t/num[i] + 1)
+ * n번째 아이가 놀이기구를 타는 시간을 구한 후, 해당 시간에 놀이기구를 타는 아이들을 모두 검사하며 n번째 아이가 타는 놀이기구의 번호를 구한다!
  *
- * t에 대해 이분탐색하다가 n 이 범위 안이면 break
+ * 1. n번째 아이가 놀이기구를 타는 시간이 언제인지 parametric search 통해 구함
+ *    - 이때, 각 시간 별 놀이기구 타는 아이의 마지막 번호 구하는 공식은 다음과 같음
+ *      f(t) = (모든 i(놀이 기구)에 대해서) t/num[i] + n(시간 0일때 놀이기구 타는 아이 수)
+ *
+ *    - left: 놀이기구 타는 시간의 최소 = 0
+ *    - right: 놀이기구 타는 시간의 최대 = (최대 놀이기구 수) * (최대 운행 시간) = 6 * 10^10
+ *
+ *    - n번째 아이가 놀이기구를 타는 첫 시간을 구해야 하므로 lower bound
+ *
+ * 2. n번째 아이가 놀이기구를 타는 시간을 구했다면, 그 시간에 마지막으로 놀이기구를 타는 아이부터 시작해서
+ *    놀이기구를 m부터 탐색하면서 n번째 아이가 몇 번 놀이기구 타는지 구하면 됨!
  */
 
 int main() {
@@ -47,25 +68,12 @@ int main() {
         cin >> rides[i];
     }
 
-    if (n <= m) {
+    if (n <= m) { //아이의 수가 놀이기구 수보다 적다면
         cout << n;
         return 0;
     }
 
-    //그 전 시간대
-    int ans = 1;
-    ll prev_time = lowerSearch(0, INF, n, rides);
-    ll prev_people = peopleOrder(prev_time, rides);
-
-    for (int i = 1; i <= m; i++) {
-        if ((prev_time + 1) % rides[i] == 0) { //추가
-            prev_people++;
-            if (prev_people == n) {
-                ans = i;
-                break;
-            }
-        }
-    }
-    cout << ans;
+    //연산 & 출력
+    cout << findRides(n, m, rides);
     return 0;
 }
