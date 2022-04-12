@@ -4,7 +4,7 @@
 using namespace std;
 const int SIZE = 1e6;
 
-//슬라이딩 윈도우로 얼음들의 최대핪 구함
+//슬라이딩 윈도우로 얼음들의 최대합 구함
 int maxIce(int k, int end_point, vector<int> &position) {
     int section = k * 2 + 1; //윈도우 영역
     int section_ice = 0;
@@ -15,7 +15,7 @@ int maxIce(int k, int end_point, vector<int> &position) {
         }
         section_ice += position[i];
     }
-    int ans = section_ice; //얼음 최대핪
+    int ans = section_ice; //얼음 최대합
     for (int i = section; i <= end_point; i++) {
         section_ice -= position[i - section]; //이번 윈도우에서 제외되는 값
         section_ice += position[i]; //이번 윈도우에서 추가되는 값

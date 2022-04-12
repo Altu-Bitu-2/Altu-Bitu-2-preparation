@@ -70,10 +70,6 @@ int main() {
     cin >> n;
 
     //연산
-    if (n == 1) { //n이 1이라면 1이하의 소수가 없으므로 바로 0 출력
-        cout << "0\n";
-        return 0;
-    }
     vector<bool> is_prime = isPrime(n);
     vector<int> prime_list = primeList(n, is_prime);
 
