@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
-#include <stack>
 
 using namespace std;
 
@@ -68,16 +67,13 @@ int main() {
         adj_matrix[b][a] = true;
     }
 
-    // 출력
-//    for (auto i: dfsIter(n, v)) {
-//        cout << i << ' ';
-//    }
     // 연산
     dfsRecur(n, v);
     // 출력
     for (auto i: order_recur) {
         cout << i << ' ';
     }
+    // 연산 + 출력
     cout << '\n';
     for (auto i: bfs(n, v)) {
         cout << i << ' ';

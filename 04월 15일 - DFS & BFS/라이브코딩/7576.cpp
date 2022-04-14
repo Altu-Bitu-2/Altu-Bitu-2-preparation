@@ -12,7 +12,7 @@ int bfs(int rows, int cols, int cnt, vector<vector<int>> &matrix, queue<ci> &que
     int dc[] = {0, 0, -1, +1};
 
 
-    int t = 0; // 현재 시간 기록
+    int t = 0; // 현재 시간 기록으
 
     while (!que.empty()) {
         auto[r, c] = que.front();   // r = que.front().first; c = que.front().second;
@@ -22,7 +22,7 @@ int bfs(int rows, int cols, int cnt, vector<vector<int>> &matrix, queue<ci> &que
             int new_r = r + dr[i];
             int new_c = c + dc[i];
             // (중요) 새로운 좌표가 범위 안에 있는지 확인한 뒤에 접근해야 한다.
-            if (new_r >= 0 and new_r < rows and new_c >= 0 and new_c < cols and matrix[new_r][new_c] == 0) {
+            if (new_r >= 0 && new_r < rows && new_c >= 0 && new_c < cols && matrix[new_r][new_c] == 0) {
                 que.push({new_r, new_c});
                 matrix[new_r][new_c] = t + 1;   // 인접해있던 익은 토마토의 다음날에 익는다.
                 cnt--;  // 익지 않은 토마토의 수를 줄여줌
@@ -36,7 +36,7 @@ int bfs(int rows, int cols, int cnt, vector<vector<int>> &matrix, queue<ci> &que
 int main() {
     int n, m;
     // 입력
-    cin >> m >> n;  // 행렬 반대로 되어 있으니 주의!
+    cin >> m >> n;  // 행렬 반대로 되어 있니 주의!
     vector<vector<int>> matrix(n, vector<int>(m, 0));   // 각 토마토의 정보를 저장할 2차원 벡터
     queue<ci> que;  // 탐색을 하기 위해 사용할 큐
 
