@@ -31,7 +31,7 @@ def bfs(i, j, picture, visited):
             visited[new_r][new_c] = True
             que.append((new_r, new_c))
 
-    return visited
+    return
 
 def count_area(n, picture):
     visited = [[False]*n for _ in range(n)]
@@ -43,7 +43,7 @@ def count_area(n, picture):
                 continue
             
             area += 1
-            visited = bfs(i, j, picture, visited)
+            bfs(i, j, picture, visited)
     
     return area
 
