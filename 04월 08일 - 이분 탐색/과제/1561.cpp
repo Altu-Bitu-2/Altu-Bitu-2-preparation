@@ -4,7 +4,6 @@
 
 using namespace std;
 typedef long long ll;
-const ll INF = 6e10;
 
 ll finalChildren(ll t, vector<int> &rides) {
     ll child = 0;
@@ -29,7 +28,7 @@ ll lowerSearch(ll left, ll right, ll target, vector<int> &rides) {
 }
 
 int findRides(int n, int m, vector<int> &rides) {
-    ll t = lowerSearch(0, INF, n, rides);
+    ll t = lowerSearch(0, (ll) rides[1] * n, n, rides);
     ll child = finalChildren(t, rides);
     for (int i = m; i >= 1; i--) {
         if (t % rides[i] == 0) { //아이가 탐
@@ -50,7 +49,7 @@ int findRides(int n, int m, vector<int> &rides) {
  *      f(t) = (모든 i(놀이 기구)에 대해서) t/num[i] + n(시간 0일때 놀이기구 타는 아이 수)
  *
  *    - left: 놀이기구 타는 시간의 최소 = 0
- *    - right: 놀이기구 타는 시간의 최대 = (최대 놀이기구 수) * (최대 운행 시간) = 6 * 10^10
+ *    - right: 놀이기구 타는 시간의 최대 = 1번 놀이기구 운행 시간 x n (타이트하게 잡으면 최소 운행 시간 x n 이지만 편의상 이렇게 설정)
  *
  *    - n번째 아이가 놀이기구를 타는 첫 시간을 구해야 하므로 lower bound
  *

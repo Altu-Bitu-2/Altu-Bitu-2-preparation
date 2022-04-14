@@ -5,25 +5,19 @@
 using namespace std;
 
 //휴게소 몇 개 설치하는지 구하는 함수
-int cntRest(int dist, int l, vector<int> &rest) {
+int cntRest(int dist, vector<int> &rest) {
     int cnt = 0;
-
-    if (rest.size() == 0) { //처음 휴게소 아예 없는 경우 예외 처리
-        return (l - 1) / dist;
-    }
-    cnt += (rest[0] - 1) / dist;
     for (int i = 1; i < rest.size(); i++) {
         cnt += (rest[i] - rest[i - 1] - 1) / dist;
     }
-    cnt += (l - rest[rest.size() - 1] - 1) / dist;
     return cnt;
 }
 
 //휴게소가 없는 구간의 최댓값 중 최솟값 구하는 함수 -> lower bound
-int lowerSearch(int left, int right, int m, int l, vector<int> &rest) {
+int lowerSearch(int left, int right, int m, vector<int> &rest) {
     while (left <= right) {
         int mid = (left + right) / 2; //최댓값 설정
-        int cnt = cntRest(mid, l, rest); //몇 개 휴게소 설치하는지
+        int cnt = cntRest(mid, rest); //몇 개 휴게소 설치하는지
 
         if (cnt > m) {
             left = mid + 1;
@@ -52,15 +46,16 @@ int main() {
 
     //입력
     cin >> n >> m >> l;
-    vector<int> rest(n, 0);
-    for (int i = 0; i < n; i++) {
+    vector<int> rest(n + 2, 0);
+    for (int i = 1; i <= n; i++) {
         cin >> rest[i];
     }
+    rest[n + 1] = l;
 
     //연산
     sort(rest.begin(), rest.end());
 
     //연산 & 출력
-    cout << lowerSearch(1, l - 1, m, l, rest);
+    cout << lowerSearch(1, l - 1, m, rest);
     return 0;
 }
