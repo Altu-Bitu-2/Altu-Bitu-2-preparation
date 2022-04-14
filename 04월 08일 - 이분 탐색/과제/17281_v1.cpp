@@ -9,23 +9,23 @@ vector<bool> check(10, false);
 int n, ans;
 
 //각 루타마다 얻는 점수
-int rutaScore(int ruta, vector<bool> &baseman) {
+int rutaScore(int hit, vector<bool> &baseman) {
     int score = 0;
     for (int i = 3; i >= 0; i--) {
         if (!baseman[i]) {
             continue;
         }
-        if (i + ruta >= 4) {
+        if (i + hit >= 4) {
             score ++;
         } else {
-            baseman[i + ruta] = true;
+            baseman[i + hit] = true;
         }
         baseman[i] = false;
     }
-    if (ruta == 4) {
+    if (hit == 4) {
         score++;
     } else {
-        baseman[ruta] = true; //새로운 선수들 홈에 도착
+        baseman[hit] = true; //새로운 선수들 홈에 도착
     }
     return score;
 }
