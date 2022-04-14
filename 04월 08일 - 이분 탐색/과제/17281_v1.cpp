@@ -9,7 +9,7 @@ vector<bool> check(10, false);
 int n, ans;
 
 //각 루타마다 얻는 점수
-int rutaScore(int hit, vector<bool> &baseman) {
+int hitScore(int hit, vector<bool> &baseman) {
     int score = 0;
     for (int i = 3; i >= 0; i--) {
         if (!baseman[i]) {
@@ -45,7 +45,7 @@ int calcScore() {
             if (state == 0) {
                 out++;
             } else {
-                score += rutaScore(state, baseman);
+                score += hitScore(state, baseman);
             }
         }
     }
