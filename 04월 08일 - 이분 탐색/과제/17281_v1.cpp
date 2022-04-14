@@ -25,7 +25,7 @@ int rutaScore(int ruta, vector<bool> &baseman) {
     if (ruta == 4) {
         score++;
     } else {
-        baseman[ruta] = true;
+        baseman[ruta] = true; //새로운 선수들 홈에 도착
     }
     return score;
 }

@@ -25,15 +25,14 @@ string makeWheel(int n, vector<ci> &record) {
         int rot = record[i].first;
         char alpha = record[i].second;
         idx = (idx - rot % n + n) % n;
-        if (wheel[idx] == '?') {
-            if (is_available[alpha - 'A']) {
-                return "!";
-            }
-            wheel[idx] = alpha;
-            is_available[alpha - 'A'] = true;
-        } else if (wheel[idx] != alpha) {
+        if (wheel[idx] == alpha) {
+            continue;
+        }
+        if (wheel[idx] != '?' || is_available[alpha - 'A']) {
             return "!";
         }
+        wheel[idx] = alpha;
+        is_available[alpha - 'A'] = true;
     }
     return arrowStartWheel(idx, n, wheel);
 }
