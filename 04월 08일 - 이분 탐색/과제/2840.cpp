@@ -18,7 +18,7 @@ string arrowStartWheel(int arrow_point, int n, vector<char> &wheel) {
 //행운의 바퀴 구하는 함수
 string makeWheel(int n, vector<ci> &record) {
     vector<char> wheel(n, '?'); //바퀴의 상태
-    vector<bool> is_available(26, 0); //알파벳 중복 체크
+    vector<bool> is_available(26, false); //알파벳 중복 체크
 
     int idx = 0; //화살표가 가리키는 인덱스
     for (int i = 0; i < record.size(); i++) {
