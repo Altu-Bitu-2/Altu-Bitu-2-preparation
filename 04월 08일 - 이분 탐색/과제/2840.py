@@ -28,15 +28,15 @@ def make_wheel(n, record):
     for rot, alpha in record:
         idx = (idx - int(rot)) % n
         
-        if wheel[idx] == '?':
-            if not is_available[alpha]:
-                return '!'
-            wheel[idx] = alpha
-            is_available[alpha] = False
-                
-        elif wheel[idx] != alpha:
+        # 같은 경우
+        if wheel[idx] == alpha:
+            continue
+        # 다른 알파벳이 써 있거나, 이미 알파벳을 다른 자리에 사용한 경우
+        if wheel[idx] != '?' or not is_available[alpha]:
             return '!'
-
+        wheel[idx] = alpha
+        is_available[alpha] = False
+                
     return ''.join(wheel[idx:]+wheel[:idx])
 
 # 입력
