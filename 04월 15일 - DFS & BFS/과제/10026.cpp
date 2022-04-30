@@ -15,7 +15,7 @@ void greenToRed(int n, vector<vector<char>> &board) {
     }
 }
 
-int bfs(int n, int r, int c, vector<vector<bool>> &visited, vector<vector<char>> &board) {
+void bfs(int n, int r, int c, vector<vector<bool>> &visited, vector<vector<char>> &board) {
     //상, 하, 좌, 우
     int dr[4] = {-1, 1, 0, 0};
     int dc[4] = {0, 0, -1, 1};
@@ -43,7 +43,6 @@ int bfs(int n, int r, int c, vector<vector<bool>> &visited, vector<vector<char>>
             visited[nr][nc] = true;
         }
     }
-    return 1;
 }
 
 int countArea(int n, vector<vector<char>> &board) {
@@ -55,7 +54,8 @@ int countArea(int n, vector<vector<char>> &board) {
             if (visited[i][j]) {
                 continue;
             }
-            area += bfs(n, i, j, visited, board);
+            bfs(n, i, j, visited, board);
+            area++;
         }
     }
     return area;
