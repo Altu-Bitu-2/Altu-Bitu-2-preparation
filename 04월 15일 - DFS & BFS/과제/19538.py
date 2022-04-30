@@ -31,7 +31,7 @@ def bfs(n, adj_list, initial_people):
                 continue
             rest[next] -= 1
             if rest[next] == 0:
-                time[next] = time[curr] + 1 # next가 t분에 루머를 퍼트리므로, curr는 t+1분에 주변인의 절반 이상에게서 루머를 듣게 된다.
+                time[next] = time[curr] + 1 # curr이 t분에 루머를 퍼트리므로, next는 t+1분에 주변인의 절반 이상에게서 루머를 듣게 된다.
                 que.append(next)
             
     return time
