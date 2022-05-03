@@ -9,9 +9,9 @@ void floydWarshall(int n, vector<vector<int>> &graph) {
         for (int i = 1; i <= n; i++) { //출발 정점
             for (int j = 1; j <= n; j++) { //도착 정점
                 //중간에 k를 거쳐서 i에서 j로 갈 때의 비용
-                int weight = graph[i][k] + graph[k][j];
+                int cost = graph[i][k] + graph[k][j];
                 //더 짧은 경로 선택
-                graph[i][j] = min(graph[i][j], weight);
+                graph[i][j] = min(graph[i][j], cost);
             }
         }
     }

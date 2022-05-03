@@ -21,7 +21,7 @@ vector<int> dijkstra(int start, int v, vector<vector<ci>> &graph) {
         pq.pop();
 
         //(튜터용) 이 부분은 나중에 추가할 예정입니다! 이 문제에선 없어도 괜찮은데 가지치기 안해주면 시간초과 나는 다익스트라 문제도 있더라구요!!
-        if (weight > dist[node]) { //이미 확인했던 정점
+        if (weight > dist[node]) { //이미 더 작은 값으로 기록된 정점
             continue;
         }
         for (int i = 0; i < graph[node].size(); i++) {

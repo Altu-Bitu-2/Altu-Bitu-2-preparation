@@ -25,9 +25,9 @@ vector<ll> bellmanFord(int start, int n, int m, vector<tp> &edges) {
             if (dist[s] == INF) { //아직 시작점에서 s로 가는 경로가 발견되지 않았으므로 갱신할 수 없음
                 continue;
             }
-            ll weight = dist[s] + w;
-            if (weight < dist[d]) {
-                dist[d] = weight;
+            ll next_weight = dist[s] + w;
+            if (next_weight < dist[d]) {
+                dist[d] = next_weight;
                 flag = false;
                 if (i == n) { //n번째 갱신이었다면 -> 음의 사이클
                     return {-1};
