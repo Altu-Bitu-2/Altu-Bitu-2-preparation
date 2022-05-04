@@ -53,8 +53,10 @@ def make_new_board(board):
     for i in range(6):
         temp = []
         for j in range(12):
+            # 남아있는 뿌요를 임시 리스트에 모으기
             if board[i][j] != '.':
                 temp.append(board[i][j])
+        # 비어 있는 부분을 '.'로 채우기
         while len(temp) < 12:
             temp.append('.')
         new_board.append(temp[:])
