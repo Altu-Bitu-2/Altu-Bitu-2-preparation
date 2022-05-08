@@ -30,7 +30,7 @@ vector<ll> bellmanFord(int start, int n, int m, vector<tp> &edges) {
                 dist[d] = next_weight;
                 flag = false;
                 if (i == n) { //n번째 갱신이었다면 -> 음의 사이클
-                    return {-1};
+                    return {INF + 1};
                 }
             }
         }
@@ -56,7 +56,7 @@ int main() {
     vector<ll> dist = bellmanFord(1, n, m, edges);
 
     //출력
-    if (dist[0] == -1) { //음의 사이클
+    if (dist[0] == INF + 1) { //음의 사이클
         cout << "-1";
         return 0;
     }
