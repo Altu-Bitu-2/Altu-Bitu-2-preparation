@@ -29,7 +29,7 @@ void floydWarshall(int n, vector<vector<int>> &graph, vector<vector<int>> &table
  *    k로 갱신하는게 아니라 table[i][k]로 갱신하는 이유는?
  *    만약 i->k의 경로가 i->t->k라면 최종 경로는 i->t->k->j
  *    바로 k로 갱신하면 t를 놓칠 수 있기 때문에 table[i][k]로 갱신
- *    line 16을 table[i][j] = k로 바꾸면 결과가 어떻게 되는지 확인해보세요
+ *    line 14을 table[i][j] = k로 바꾸면 결과가 어떻게 되는지 확인해보세요
  */
 
 int main() {

@@ -75,18 +75,18 @@ vector<vector<char>> makeNewBoard(vector<vector<char>> &board) {
 int simulation(vector<vector<char>> &board) {
     int answer = 0;
     while (true) {
-        bool flag = true; //뿌요가 터지지 않았는지 확인
+        bool flag = false; //뿌요가 터졌는지 확인
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (board[i][j] == '.') {
                     continue;
                 }
                 if (bfs(i, j, board)) { //한 번이라도 뿌요 터졌다면
-                    flag = false;
+                    flag = true;
                 }
             }
         }
-        if (flag) {
+        if (!flag) {
             break;
         }
         board = makeNewBoard(board);
@@ -105,7 +105,7 @@ int simulation(vector<vector<char>> &board) {
  * 4. 터뜨릴 수 없을 때까지 반복
  *
  * 여기서, 3번 과정을 편하게 하기 위해 12*6으로 들어오는 입력을 6*12로 바꾸어준다.
- * <= 같은 열에 있는 데이터를 다루는 것보다 같은 행에 있는 데이터를 다루는 것이 편하기 때문이다.
+ * 같은 열에 있는 데이터를 다루는 것보다 같은 행에 있는 데이터를 다루는 것이 편하기 때문이다.
  */
 
 int main() {
