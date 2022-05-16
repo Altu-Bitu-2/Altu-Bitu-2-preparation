@@ -40,7 +40,7 @@ def is_end(r, c, board):
             return True
     return False
 
-def solution(board):
+def simulation(board):
     for i in range(SIZE):
         for j in range(SIZE):
             # 돌이 없는 경우
@@ -48,14 +48,11 @@ def solution(board):
                 continue
             # 누군가 이겼으면
             if is_end(i, j, board):
-                print(board[i][j])
-                print(i+1, j+1)
-                return
-    
-    print(0)
-    return
+                return "{}\n{} {}".format(board[i][j], i+1, j+1)
+
+    return 0
 
 # 입력
 board = [list(map(int, input().split())) for _ in range(SIZE)]
 # 연산 + 출력
-solution(board)
+print(simulation(board))

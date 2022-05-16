@@ -11,6 +11,8 @@ MAX = 1000
     -> 3번째 블럭을 결정하면서 현재 좌표를 갱신하지 않고, 직전 좌표에서 다시 한번 백트래킹을 진행하여 얻을 수 있음
  3. 각 블럭에 대해 깊이가 4인 백트래킹 함수를 수행하며 최댓값 갱신
 
+ 방문처리 -> board를 활용해서 0을 저장하는 것으로
+ 가지치기 -> 현재 탐색이 남은 칸을 모두 MAX라 해도 ans이 더 큰 경우
 """
 
 # 한붓 그리기가 가능한 블럭들 백트래킹 탐색
@@ -59,7 +61,7 @@ for i in range(n):
     for j in range(m):
         save = board[i][j]
         board[i][j] = 0
-        backtracking(i, j, 1, save)     # 나머지 모양 처리
+        backtracking(i, j, 1, save)     # 모양 처리
         board[i][j] = save
 
 # 출력
