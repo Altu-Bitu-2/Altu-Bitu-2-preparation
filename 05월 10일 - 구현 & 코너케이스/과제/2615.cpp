@@ -15,15 +15,16 @@ bool validDir(int r, int c, int d, int stone, vector<vector<int>> &board) {
     int dc[4] = {1, 0, 1, 1};
 
     //(r, c) 이전에 위치한 이어지는 돌이 있나?
-    bool is_six = promising(r - dr[d], c - dc[d], stone, board);
-
+    if (promising(r - dr[d], c - dc[d], stone, board)) {
+        return false;
+    }
     int cnt = 0;
     while (cnt < 6 && promising(r, c, stone, board)) { //(r, c)를 가장 왼쪽으로 하는 이어지는 바둑알의 개수
         cnt++;
         r += dr[d];
         c += dc[d];
     }
-    return cnt == 5 && !is_six;
+    return cnt == 5;
 }
 
 bool isEnd(int r, int c, vector<vector<int>> &board) {
@@ -40,7 +41,8 @@ bool isEnd(int r, int c, vector<vector<int>> &board) {
  *
  * 1. 특정 좌표(r, c)를 가장 왼쪽으로 하는 가능한 모든 오목 배치에 대해 오목 여부 확인
  *    가능한 모든 배치 :  오른쪽, 아래, 우하향, 우상향
- * 2. 육목이상이 되는 경우 : (r, c) 왼쪽에 같은 돌이 있는 경우
+ * 2. (주의) 육목이상이 되는지 확인해야 함
+ *
  */
 
 int main() {

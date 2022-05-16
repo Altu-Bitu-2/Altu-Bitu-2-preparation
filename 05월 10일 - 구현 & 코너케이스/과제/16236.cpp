@@ -13,31 +13,30 @@ pair<int, ci> nextPos(int n, int shark_size, ci &shark, vector<vector<int>> &boa
 
     int min_dist = INF;
     queue<ci> q; //상어가 갈 수 있는 곳
-    vector<vector<int>> visited(n, vector<int>(n, 0)); //상어의 방문 여부
+    vector<vector<int>> dist(n, vector<int>(n, 0)); //상어의 방문 여부 + 거리
     vector<ci> list; //상어가 먹을 수 있는 물고기들의 위치
 
-    visited[shark.first][shark.second] = 1;
+    dist[shark.first][shark.second] = 1;
     q.push(shark);
     while (!q.empty()) {
         int row = q.front().first;
         int col = q.front().second;
-        int dist = visited[row][col];
         q.pop();
 
-        if (dist >= min_dist) { //최단거리 이상은 탐색할 필요 없음
+        if (dist[row][col] >= min_dist) { //최단거리 이상은 탐색할 필요 없음
             continue;
         }
         for (int i = 0; i < 4; i++) {
             int nr = row + dr[i];
             int nc = col + dc[i];
-            if (nr < 0 || nr >= n || nc < 0 || nc >= n || visited[nr][nc] || board[nr][nc] > shark_size) {
+            if (nr < 0 || nr >= n || nc < 0 || nc >= n || dist[nr][nc] || board[nr][nc] > shark_size) {
                 continue;
             }
 
-            visited[nr][nc] = visited[row][col] + 1;
+            dist[nr][nc] = dist[row][col] + 1;
             if (board[nr][nc] && board[nr][nc] < shark_size) { //먹을 수 있는 물고기 발견
                 list.emplace_back(nr, nc);
-                min_dist = visited[nr][nc];
+                min_dist = dist[nr][nc];
                 continue;
             }
             q.push({nr, nc});
@@ -72,9 +71,8 @@ int simulation(int n, pair<int, int> &shark, vector<vector<int>> &board) {
         }
 
         //상어 이동
-        ci pos = result.second;
         board[shark.first][shark.second] = 0;
-        shark = pos;
+        shark = result.second;
     }
     return ans;
 }
@@ -95,6 +93,7 @@ int simulation(int n, pair<int, int> &shark, vector<vector<int>> &board) {
  * 해설 : https://myunji.tistory.com/378
  * *글 자체는 별로 도움이 안되고...그냥 리팩토링하면 코드가 이렇게 되는구나 정도만 봐주세요
  */
+
 int main() {
     int n;
     pair<int, int> shark_pos;
