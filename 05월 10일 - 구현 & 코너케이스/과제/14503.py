@@ -25,6 +25,7 @@ def cnt_clean_robot(r, c, d, board):
         if step == 4:
             if board[r - dr[d]][c - dc[d]] == 1:
                 return ans
+                
             r -= dr[d]
             c -= dc[d]
             step = 0
