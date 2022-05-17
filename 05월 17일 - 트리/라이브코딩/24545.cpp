@@ -9,7 +9,7 @@ vector<vector<int>> tree;   // 인접리스트 형태로 저장
 vector<map<int, int>> cnt_node; // 간선에 노드 수를 저장
 
 int dfs(int curr, int prev) {
-    if (cnt_node[prev][curr] > 0) { // 이미 저장해둔 값 있으면 바로 리턴
+    if (cnt_node[prev][curr]) { // 이미 저장해둔 값 있으면 바로 리턴
         return cnt_node[prev][curr];
     }
 
@@ -29,7 +29,7 @@ int getMaxYTree(int n) {
     int ans = 0;
     // Y-트리의 중심이 될 노드를 순차적으로 탐색
     for (int curr = 1; curr <= n; curr++) {
-        if (tree[curr].size() < 3){ // out-going edge < 3인 경우 중심이 될 수 없음
+        if (tree[curr].size() < 3){ // 간선의 수 < 3인 경우 중심이 될 수 없음
             continue;
         }
 

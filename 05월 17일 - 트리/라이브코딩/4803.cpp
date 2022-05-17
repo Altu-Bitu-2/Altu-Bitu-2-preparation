@@ -14,7 +14,6 @@ void printResult(int tc, int tree_cnt) {
         case 0:
             cout << "No trees.\n";
             break;
-            0
         case 1:
             cout << "There is one tree.\n";
             break;
@@ -42,15 +41,13 @@ void dfs(int curr, int prev) {
 }
 
 int main() {
-    int n, m, a, b;
-    int tc = 0;
+    int n, m, a, b, tc = 0;
     while (cin >> n >> m) {
         // 종료 조건
         if (n == 0 && m == 0) {
             break;
         }
 
-        IN
         // 초기화
         tc++;
         graph.assign(n + 1, vector<int>(0));
@@ -67,6 +64,9 @@ int main() {
         int tree_cnt = 0;
 
         for (int i = 1; i <= n; i++) {
+            if (visited[i]) {
+                continue;
+            }
             is_tree = true;
             dfs(i, 0);
             if (is_tree) {

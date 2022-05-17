@@ -38,9 +38,10 @@ void postorder(char v){
 }
 
 int main(){
-    // 입력
     int n;
     char root, left, right;
+
+    // 입력
     cin >> n;
     while (n--){
         cin >> root >> left >> right;
