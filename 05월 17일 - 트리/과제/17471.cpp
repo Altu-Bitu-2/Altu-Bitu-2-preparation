@@ -2,19 +2,33 @@
 #include <vector>
 
 using namespace std;
-const int INF = 1e9;
+const int INF = 1e3;
 
 int n, ans = INF;
 vector<bool> is_ward, visited;
 vector<int> people;
 vector<vector<int>> graph;
 
+//두 선거구의 인구 수 차이 구하는 함수
+int calcDiff() {
+    int sum1 = 0, sum2 = 0;
+    for (int i = 1; i <= n; i++) {
+        if (is_ward[i]) {
+            sum1 += people[i];
+        } else {
+            sum2 += people[i];
+        }
+    }
+    return abs(sum1 - sum2);
+}
+
+//선거구 내의 정점 연결됐는지 탐색하는 dfs 함수
 int dfs(int curr, bool state) {
     if (visited[curr]) {
         return 0;
     }
     visited[curr] = true;
-    int cnt = people[curr];
+    int cnt = 1;
     for (int i = 0; i < graph[curr].size(); i++) {
         if (is_ward[graph[curr][i]] == state) {
             cnt += dfs(graph[curr][i], state);
@@ -23,67 +37,62 @@ int dfs(int curr, bool state) {
     return cnt;
 }
 
-void backtracking(int cnt) {
-    if (cnt == n + 1) {
-        visited.assign(n + 1, false);
-        int curr = 0;
-        int p1 = dfs(1, true);
+void backtracking(int cnt, int true_area) {
+    if (cnt == n + 1) { //(기저조건) 모든 구역 탐색
+        int false_node = 0;
         for (int i = 1; i <= n; i++) {
             if (!is_ward[i]) {
-                curr = i;
-            }
-            if (visited[i] != is_ward[i]) {
-                return;
+                false_node = i;
+                break;
             }
         }
-        int p2 = dfs(curr, false);
-        for (int i = 1; i <= n; i++) {
-            if (!visited[i]) {
-                return;
-            }
+        visited.assign(n + 1, false);
+        if (true_area != n && true_area == dfs(1, true) && (n - true_area) == dfs(false_node, false)) {
+            ans = min(ans, calcDiff());
         }
-        ans = min(ans, abs(p1 - p2));
         return;
     }
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; i++) { //0: false, 1: true
         is_ward[cnt] = i;
-        backtracking(cnt + 1);
+        backtracking(cnt + 1, true_area + i);
         is_ward[cnt] = false;
     }
-
 }
 
 /**
  * [게리맨더링]
  *
- * 백트래킹으로 구역을 나누는 모든 경우의 수 구하기 - 백트래킹
- * 각 경우마다 나눈 두 구역이 조건을 만족하는지(구역 내 정점은 모두 연결) 확인 - dfs
+ * 1. 구역을 나누는 모든 경우의 수 구하기 - 백트래킹
+ * - 두 선거구로 나누는 경우이므로 모든 구역에 대해 true/false로 구분해서 경우의 수 구하기
+ * - 이때, 중복 연산 피하기 위해 1번 구역은 true로 고정. (집합끼리 구분할 필요가 없으므로 1번이 false일 때의 경우의 수는 1번이 true일 때와 정확히 일치)
+ * 2. 각 경우마다 나눈 두 구역이 조건(구역 내 정점이 모두 연결)을 만족하는지 확인 - dfs
+ * - 구역 내 한 정점에서 dfs 탐색을 시작해서 구역 내의 모든 정점을 방문했다면 조건 만족한 것임
+ * 3. 두 구역이 조건을 만족한다면 인구 수의 차이 구해서 최솟값 갱신
  */
 
 int main() {
-    int c, a;
+    int cnt, input;
 
     //입력
     cin >> n;
     people.assign(n + 1, 0);
     graph.assign(n + 1, vector<int>(0)); //인접리스트
     is_ward.assign(n + 1, false);
-    visited.assign(n + 1, false);
     for (int i = 1; i <= n; i++) {
         cin >> people[i];
     }
     for (int i = 1; i <= n; i++) {
-        cin >> c;
-        while (c--) {
-            cin >> a;
-            graph[i].push_back(a);
-            graph[a].push_back(i);
+        cin >> cnt;
+        while (cnt--) {
+            cin >> input;
+            graph[i].push_back(input);
+            graph[input].push_back(i);
         }
     }
 
     //연산
-    is_ward[1] = true; //1번 고정
-    backtracking(2);
+    is_ward[1] = true; //1번 구역 고정
+    backtracking(2, 1);
 
     //출력
     cout << (ans == INF ? -1 : ans);

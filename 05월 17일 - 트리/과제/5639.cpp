@@ -13,9 +13,9 @@ node_info *makeTree(node_info *node, int data) {
         node = new node_info(); //동적 할당
         node->data = data;
         node->left = node->right = NULL;
-    } else if (node->data > data) { //왼쪽 서브트리로 이동
+    } else if (node->data > data) {
         node->left = makeTree(node->left, data);
-    } else if (node->data < data) { //오른쪽 서브트리로 이동
+    } else if (node->data < data) {
         node->right = makeTree(node->right, data);
     }
     return node;

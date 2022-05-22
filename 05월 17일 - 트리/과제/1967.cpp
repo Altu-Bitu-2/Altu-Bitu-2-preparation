@@ -39,8 +39,8 @@ int main() {
     vector<vector<ci>> graph(n + 1, vector<ci>(0));
     for (int i = 1; i < n; i++) { //무방향 그래프로 만들기
         cin >> p >> c >> w;
-        graph[p].emplace_back(c, w);
-        graph[c].emplace_back(p, w);
+        graph[p].push_back({c, w});
+        graph[c].push_back({p, w});
     }
 
     //연산

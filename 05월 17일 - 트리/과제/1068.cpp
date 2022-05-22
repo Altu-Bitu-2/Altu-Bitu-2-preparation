@@ -7,7 +7,7 @@ vector<vector<int>> tree;
 
 //리프 노드의 수
 int leafCnt(int node) {
-    if (tree[node].empty()) { //리프 노드
+    if (tree[node].empty()) {
         return 1;
     }
     int cnt = 0;
@@ -16,6 +16,27 @@ int leafCnt(int node) {
     }
     return cnt;
 }
+
+int eraseNode(int n, int &root, int &erase_node) {
+    int total_leaf = leafCnt(root);
+    int erase_leaf = leafCnt(erase_node);
+    for (int i = 0; i < n; i++) {
+        if (tree[i].size() == 1 && tree[i][0] == erase_node) {
+            total_leaf++;
+        }
+    }
+    return total_leaf - erase_leaf;
+}
+
+/**
+ * [트리]
+ *
+ * - 전체 리프 노드의 개수에서 지우는 정점의 리프 노드 개수를 뺌
+ * - 리프 노드의 개수는 dfs 탐색으로 구함 (특정 노드를 루트로 했을 때의 리프 노드 개수를 편하게 구할 수 있음)
+ *
+ * !주의! 지우는 정점이 해당 부모 노드의 유일한 자식 노드였을 경우, 해당 정점을 지우면 부모 노드가 리프 노드가 돼서 개수가 1 증가함을 주의
+ * !주의! 루트 노드가 항상 0이 아님을 주의
+ */
 
 int main() {
     int n, par, root, erase_node;
@@ -33,20 +54,7 @@ int main() {
     }
     cin >> erase_node;
 
-    //총 리프 노드의 개수 먼저 구함
-    int total_leaf = leafCnt(root);
-
-    //정점 지움으로써 리프 노드 1개 늘어난 경우
-    for (int i = 0; i < n; i++) {
-        if (tree[i].size() == 1 && tree[i][0] == erase_node) {
-            total_leaf++;
-        }
-    }
-
-    //지우는 정점의 리프 노드 개수
-    int erase_leaf = leafCnt(erase_node);
-
-    //출력
-    cout << total_leaf - erase_leaf;
+    //연산 & 출력
+    cout << eraseNode(n, root, erase_node);
     return 0;
 }
