@@ -1,16 +1,15 @@
 SIZE = 10
 
 """
-[양궁대회]
+ [양궁대회]
 
-가능한 모든 경우를 백트래킹을 통해 검사
-가장 큰 점수 "차이"로 이기는 경우를 구하는 문제
-점수 차이가 같은 경우, 더 낮은 점수를 많이 맞힐 경우 선택
+ 1. 가능한 모든 경우를 백트래킹 탐색을 통해 검사
+ -> 라이언이 점수를 얻어가려면 어피치보다 1개 더 쏘는 경우가 최적. 어피치보다 적게 화살 쏘는 건 점수 못 얻어가므로 어차피 의미가 없음.
+ -> 따라서 라이언이 각 점수에 화살을 아래와 같이 쏘는 2가지 경우만 고려해서 만들어지는 모든 경우를 백트래킹으로 탐색
+    - 어피치가 점수 획득을 하는 경우: 해당 점수에는 화살을 한 발도 쏘지 않는 것이 이득
+    - 라이언이 점수 획득을 하는 경우: 필요한 최소 화살을 사용하는 것이 이득이므로 어피치보다 정확히 한 발 더 쏨
 
-- 백트래킹을 할 때, 모든 경우를 연산할 필요 없음
-    1. 어피치가 점수 획득을 하는 경우: 이 경우 해당 점수에는 화살을 한 발도 쏘지 않는 것이 이득
-    2. 라이언이 점수 획득을 하는 경우: 필요한 최소 화살을 사용하는 것이 이득이므로 어피치보다 정확히 한 발 더 쏘면 된다.
-    -> 즉, 각 경우에서 그리디한 선택을 해야 불필요한 연산을 줄일 수 있음
+ !주의! 0번 인덱스가 10점 과녁임을 주의
 """
 
 max_diff = 1
@@ -19,6 +18,7 @@ answer = [-1]
 
 def backtracking(idx, left, diff, ryan, appeach):
     global max_diff, answer
+    # 기저조건 - 0점 과녁까지 모두 탐색한 경우
     if idx == SIZE:
         ryan[idx] = left
         
@@ -30,18 +30,20 @@ def backtracking(idx, left, diff, ryan, appeach):
                 answer = ryan[:]
         return
     
+    # 남은 화살로 라이언이 점수를 얻을 수 있는 경우
     if left > appeach[idx]:
         ryan[idx] = appeach[idx] + 1
         backtracking(idx+1, left - ryan[idx], diff + SIZE - idx, ryan, appeach)
         ryan[idx] = 0
 
+    # 어피치가 점수를 얻을 수 있는 경우 점수 계산
     if appeach[idx]:
         diff -= SIZE - idx
     backtracking(idx+1, left, diff, ryan, appeach)
     return
 
 def solution(n, info):
-    ryan = [0]*11
+    ryan = [0]*11   # 라이언 과녁 정보
     backtracking(0, n, 0, ryan, info)
     
     return answer
