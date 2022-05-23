@@ -13,12 +13,12 @@ ci dfs(int node, int parent, vector<vector<ci>> &graph) {
         }
 
         ci dfs_search = dfs(next_node, node, graph); //자식 노드에 대해 dfs 탐색
-        if (graph[node][i].second + dfs_search.first > len) { //기존 거리보다 길다면 갱신
-            len = graph[node][i].second + dfs_search.first;
-            pos = dfs_search.second;
+        if (graph[node][i].second + dfs_search.second > len) { //기존 거리보다 길다면 갱신
+            len = graph[node][i].second + dfs_search.second;
+            pos = dfs_search.first;
         }
     }
-    return {len, pos};
+    return {pos, len};
 }
 
 /**
@@ -45,9 +45,9 @@ int main() {
 
     //연산
     ci first_node = dfs(1, -1, graph); //지름을 구성하는 노드 하나 찾기
-    ci second_node = dfs(first_node.second, -1, graph); //지름을 구성하는 다른 노드 찾기
+    ci second_node = dfs(first_node.first, -1, graph); //지름을 구성하는 다른 노드 찾기
 
     //출력
-    cout << second_node.first;
+    cout << second_node.second;
     return 0;
 }

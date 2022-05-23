@@ -39,6 +39,9 @@ int dfs(int curr, bool state) {
 
 void backtracking(int cnt, int true_area) {
     if (cnt == n + 1) { //(기저조건) 모든 구역 탐색
+        if (true_area == n) {
+            return;
+        }
         int false_node = 0;
         for (int i = 1; i <= n; i++) {
             if (!is_ward[i]) {
@@ -47,16 +50,15 @@ void backtracking(int cnt, int true_area) {
             }
         }
         visited.assign(n + 1, false);
-        if (true_area != n && true_area == dfs(1, true) && (n - true_area) == dfs(false_node, false)) {
+        if (true_area == dfs(1, true) && (n - true_area) == dfs(false_node, false)) {
             ans = min(ans, calcDiff());
         }
         return;
     }
-    for (int i = 0; i < 2; i++) { //0: false, 1: true
-        is_ward[cnt] = i;
-        backtracking(cnt + 1, true_area + i);
-        is_ward[cnt] = false;
-    }
+    is_ward[cnt] = true;
+    backtracking(cnt + 1, true_area + 1);
+    is_ward[cnt] = false;
+    backtracking(cnt + 1, true_area);
 }
 
 /**
@@ -85,8 +87,7 @@ int main() {
         cin >> cnt;
         while (cnt--) {
             cin >> input;
-            graph[i].push_back(input);
-            graph[input].push_back(i);
+            graph[i].push_back(input); //양방향 그래프지만, 입력 자체가 양방향으로 들어옴
         }
     }
 
