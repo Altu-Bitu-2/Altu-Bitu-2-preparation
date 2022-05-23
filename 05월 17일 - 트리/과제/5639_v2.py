@@ -6,7 +6,11 @@ sys.setrecursionlimit(10**6)
 
  전위순회 - V L R
  후위순회 - L R V
-    -> 왼쪽 서브트리와 오른쪽 서브트리를 나누어서 재귀적으로 후위순회를 구함
+
+ 1. 전위 순회는 root 노드의 위치는 알 수 있지만 왼쪽, 오른쪽 서브트리의 경계는 알 수 없음
+ 2. BST의 성질 : 왼쪽 서브트리의 모든 노드 값 < 루트 노드 값 < 오른쪽 서브트리의 모든 노드 값
+    -> 처음으로 root 보다 값이 커진다면, 그 위치가 왼쪽, 오른쪽 서브트리의 경계
+ 3. 재귀함수 호출로 분할 반복하며 출력
 """
 
 def preorder_to_postorder(start, end):
@@ -15,7 +19,7 @@ def preorder_to_postorder(start, end):
 
     curr = preorder[start]
 
-    # 오른쪽 자식이 없는 경우
+    # 오른쪽 자식이 없는 경우를 미리 확인하여 불필요한 탐색을 줄임
     if preorder[end] <= curr:
         idx = end + 1
     else:
