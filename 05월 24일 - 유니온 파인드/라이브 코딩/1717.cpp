@@ -18,7 +18,7 @@ void unionInput(int x, int y) {
     int xp = findParent(x);
     int yp = findParent(y);
 
-    if (xp == yp) { //같은 집합에 있다면 유니온 할 수 없음
+    if (xp == yp) { //이미 같은 집합에 있는 경우
         return;
     }
     if (parent[xp] < parent[yp]) { //새로운 루트 xp

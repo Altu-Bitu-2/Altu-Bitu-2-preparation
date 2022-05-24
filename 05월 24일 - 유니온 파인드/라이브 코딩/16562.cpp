@@ -9,6 +9,7 @@ int friendshipCost(int n) {
     int sum = 0;
     for (int i = 1; i <= n; i++) {
         if (parent[i] < 0) { //루트 정점이라면
+            //루트 정점의 parent 값에 친구비가 음수로 저장되어 있으므로 다시 -연산을 해서 더해줌
             sum -= parent[i];
         }
     }
@@ -28,7 +29,7 @@ void unionInput(int x, int y) {
     int xp = findParent(x);
     int yp = findParent(y);
 
-    if (xp == yp) { //같은 집합에 있다면 유니온 할 수 없음
+    if (xp == yp) { //이미 같은 집합에 있는 경우
         return;
     }
     if (parent[xp] > parent[yp]) { //루트 xp의 값이 더 크다면 -> 친구비가 더 적은 경우
@@ -57,10 +58,6 @@ int main() {
     int ans = friendshipCost(n);
 
     //출력
-    if (ans <= k) {
-        cout << ans;
-    } else {
-        cout << "Oh no";
-    }
+    cout << (ans <= k ? to_string(ans) : "Oh no"); //삼항 연산자 사용 시 자료형 맞춰야 함
     return 0;
 }
