@@ -10,7 +10,8 @@ unordered_map <ll, ll> parent;
 //Find 연산
 ll findParent(ll node) {
     if (parent.find(node) == parent.end()) {
-        return parent[node] = node + 1;
+        parent[node] = node + 1;
+        return node;
     }
     return parent[node] = findParent(parent[node]);
 }
@@ -18,7 +19,7 @@ ll findParent(ll node) {
 vector<ll> assignRoom(vector<ll> &room_number) {
     vector<ll> answer(room_number.size(), 0);
     for (int i = 0; i < room_number.size(); i++) {
-        answer[i] = findParent(room_number[i]) - 1; //다음 방을 집합의 루트 정점으로 처리했기 때문에 현재 배정된 방은 1을 빼줌
+        answer[i] = findParent(room_number[i]);
     }
     return answer;
 }

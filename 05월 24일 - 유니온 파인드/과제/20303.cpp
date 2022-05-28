@@ -7,7 +7,7 @@ typedef pair<int, int> ci;
 vector<ci> parent;
 
 int knapsack(int n, int k) {
-    vector<ci> candy;
+    vector<ci> candy; //first: 아이들의 수, second: 사탕 개수
     for (int i = 1; i <= n; i++) {
         if (parent[i].first < 0) {
             candy.push_back({-parent[i].first, parent[i].second});

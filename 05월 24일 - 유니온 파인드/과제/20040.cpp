@@ -48,7 +48,7 @@ int main() {
         cin >> x >> y;
 
         //연산 & 출력
-        if (!unionInput(x, y)) { //유니온 할 수 없음 = 사이클이 생성됨
+        if (!unionInput(x, y)) { //사이클이 생성됨
             cout << i + 1;
             return 0;
         }
