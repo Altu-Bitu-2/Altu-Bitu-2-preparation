@@ -18,9 +18,13 @@ int findParent(int x) {
 }
 
 // union 연산
-void unionNodes(int x, int y) {
+bool unionNodes(int x, int y) {
     int px = findParent(x);
     int py = findParent(y);
+
+    if (px == py) {
+        return false;
+    }
 
     if (px < py) { //새로운 루트 xp
         parent[px] += parent[py];
@@ -29,7 +33,7 @@ void unionNodes(int x, int y) {
         parent[py] += parent[px];
         parent[px] = py;
     }
-
+    return true;
 }
 
 double kruskal(int n, vector<tp> &vertex) {
@@ -37,10 +41,9 @@ double kruskal(int n, vector<tp> &vertex) {
     int cnt = 0;
 
     for (auto[w, n1, n2]: vertex) {
-        if (findParent(n1) == findParent(n2)) { //사이클이 생기는 경우
+        if (!unionNodes(n1, n2)) { //사이클이 생기는 경우
             continue;
         }
-        unionNodes(n1, n2);
         sum += w;
         cnt++;
         if (cnt == n - 1) { //간선 다 찾은 경우
