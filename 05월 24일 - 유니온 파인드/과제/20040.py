@@ -22,7 +22,7 @@ def union(x, y):
     py = find_parent(y)
 
     if px == py:
-        return True
+        return False
 
     if parent[px] < parent[py]:
         parent[px] += parent[py]
@@ -31,7 +31,7 @@ def union(x, y):
         parent[py] += parent[px]
         parent[px] = py
 
-    return False
+    return True
 
 # 입력
 n, m = map(int, input().split())
@@ -39,7 +39,8 @@ parent = [-1]*n     # 초기화
 
 for i in range(m):
     x, y = map(int, input().split())
-    if union(x, y):
+    if not union(x, y):
+        # 사이클이 생성됨
         print(i+1)
         break
 else:   # for-else문: for문이 break에 걸리지 않고 정상 종료된 경우에만 else문 실행

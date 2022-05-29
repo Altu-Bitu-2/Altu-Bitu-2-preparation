@@ -5,7 +5,7 @@ input = sys.stdin.readline
 """
  [할로윈의 양아치] - pypy3로 제출
 
- - weighted union find -> 루트 정점에 아이들의 수(집합 원소 수)와 사탕 개수까지 pair 쌍으로 저장하기
+ - weighted union find -> 루트 정점에 아이들의 수(집합 원소 수)와 사탕 개수까지 쌍으로 저장하기
  - dp(냅색)으로 K명 미만의 아이들에게서 뺏을 수 있는 최대 사탕 수 구하기
 """
 
@@ -36,12 +36,12 @@ def union(x, y):
 
 def knapsack(k):
     dp = [0] * k    # 1부터 k-1까지
-    candy = []
+    count = []      # [아이들의 수, 사탕의 수]
     for p, c in parent:
         if p < 0:
-            candy.append((-p, c))
+            count.append((-p, c))
     
-    for child_cnt, candy_cnt in candy:
+    for child_cnt, candy_cnt in count:
         for i in range(k-1, child_cnt-1, -1):
             dp[i] = max(dp[i], dp[i-child_cnt] + candy_cnt)
 
@@ -49,7 +49,7 @@ def knapsack(k):
 
 # 입력
 n, m, k = map(int, input().split())
-parent = [[-1, i] for i in map(int, ("0 "+input()).split())]    #[아이들의 수, 사탕 개수]
+parent = [[-1, i] for i in map(int, ("0 "+input()).split())]    #[-아이들의 수, 사탕 개수]
 
 for _ in range(m):
     a, b = map(int, input().split())
