@@ -7,16 +7,16 @@ typedef pair<int, int> ci;
 vector<ci> parent;
 
 int knapsack(int n, int k) {
-    vector<ci> candy; //first: 아이들의 수, second: 사탕 개수
+    vector<ci> cnt; //first: 아이들의 수, second: 사탕 개수
     for (int i = 1; i <= n; i++) {
         if (parent[i].first < 0) {
-            candy.push_back({-parent[i].first, parent[i].second});
+            cnt.push_back({-parent[i].first, parent[i].second});
         }
     }
     vector<int> dp(k, 0); //1부터 k-1까지
-    for (int i = 0; i < candy.size(); i++) {
-        for (int j = k - 1; j >= candy[i].first; j--) {
-            dp[j] = max(dp[j], dp[j - candy[i].first] + candy[i].second);
+    for (int i = 0; i < cnt.size(); i++) {
+        for (int j = k - 1; j >= cnt[i].first; j--) {
+            dp[j] = max(dp[j], dp[j - cnt[i].first] + cnt[i].second);
         }
     }
     return dp[k - 1];
