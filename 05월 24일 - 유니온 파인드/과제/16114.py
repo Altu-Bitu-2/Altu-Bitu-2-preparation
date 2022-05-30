@@ -21,8 +21,7 @@ def solution(x, n):
         return 0
     if n == 0:
         return "INFINITE"
-    minus = n // 2
-    return (x - 1) // minus
+    return (x - 1) // (n // 2)
 
 # 입력
 x, n = map(int, input().split())
