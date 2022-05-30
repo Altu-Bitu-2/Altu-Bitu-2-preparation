@@ -25,10 +25,10 @@ bool unionNodes(int x, int y) {
         return false;
     }
 
-    if (px < py) { //새로운 루트 xp
+    if (px < py) { //새로운 루트 px
         parent[px] += parent[py];
         parent[py] = px;
-    } else { //새로운 루트 yp
+    } else { //새로운 루트 py
         parent[py] += parent[px];
         parent[px] = py;
     }
@@ -39,6 +39,9 @@ int kruskal(int v, vector<tp> &vertex) {
     int sum = 0, cnt = 0;
 
     for (auto[w, n1, n2]: vertex) {
+//        w = get<0>(vertex[i]);
+//        n1 = get<1>(vertex[i]);
+//        n2 = get<2>(vertex[i]);
         if (!unionNodes(n1, n2)) { //사이클이 생기는 경우
             continue;
         }
@@ -64,6 +67,8 @@ int main() {
         vertex.push_back({c, a, b});
     }
     sort(vertex.begin(), vertex.end());
+
+    // 연산 & 출력
     cout << kruskal(v, vertex);
     return 0;
 }

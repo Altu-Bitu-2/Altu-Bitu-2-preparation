@@ -60,8 +60,8 @@ int main() {
     }
 
     //연산 & 출력
-    cout << fixed;
-    cout.precision(2);
+    cout << fixed;  // 고정된 소수점 자리로 출력할 것을 선언
+    cout.precision(2);  // 소수점 2번째자리로 정확도를 설정
     cout << prim(n, 1, graph);
     return 0;
 }

@@ -26,10 +26,10 @@ bool unionNodes(int x, int y) {
         return false;
     }
 
-    if (px < py) { //새로운 루트 xp
+    if (px < py) { //새로운 루트 px
         parent[px] += parent[py];
         parent[py] = px;
-    } else { //새로운 루트 yp
+    } else { //새로운 루트 py
         parent[py] += parent[px];
         parent[px] = py;
     }
@@ -77,8 +77,8 @@ int main() {
     sort(vertex.begin(), vertex.end());
 
     //연산 & 출력
-    cout << fixed;
-    cout.precision(2);
+    cout << fixed;  // 고정된 소수점 자리로 출력할 것을 선언
+    cout.precision(2);  // 소수점 2번째자리로 정확도를 설정
     cout << kruskal(n, vertex);
     return 0;
 }
