@@ -4,6 +4,10 @@ input = sys.stdin.readline
 """
 [전력난]
 
+모든 집에서 서로 왕복할 수 있는 상태를 유지하면서 가로등을 꺼야 하는 문제
+문제에서 주어지는 간선을 오름차순으로 정렬한 후, 크루스칼 알고리즘을 통해 최소신장트리(MST) 구하기
+
+!주의! 가로등을 설치하는데 드는 비용이 아니라, 가로등을 꺼서 절약할 수 있는 최대 비용을 구해야 함
 """
 
 # find 연산
@@ -37,7 +41,7 @@ def kruskal(n, vertex):
     for u, v, w in vertex:
         if not union(u, v):
             continue
-        
+
         cost += w
         cnt += 1
 
@@ -46,26 +50,17 @@ def kruskal(n, vertex):
 
     return cost
 
-# 입력
-n, m = map(int, input().split())
-position = [tuple(map(int, input().split())) for _ in range(n)]
-vertex = []
+while True:
+    # 입력
+    m, n = map(int, input().split())
+    if m == n == 0:
+        break
+    vertex = [tuple(map(int, input().split())) for _ in range(n)]
 
-for i in range(n):
-    for j in range(i):
-        dx = position[i][0] - position[j][0]
-        dy = position[i][1] - position[j][1]
+    # 초기화
+    parent = [-1]*(m)
 
-        vertex.append((i, j, (dx**2 + dy**2)**(1/2)))
+    vertex.sort(key=lambda x:x[2])  # 정렬
 
-# 초기화
-parent = [-1]*(n)
-
-for _ in range(m):
-    u, v = map(int, input().split())
-    union(u-1, v-1)
-
-vertex.sort(key=lambda x:x[2])  # 정렬
-
-# 연산 & 출력
-print("%.2f" %(kruskal(n, vertex)))
+    # 연산 & 출력
+    print(sum(map(lambda x:x[2], vertex)) - kruskal(m, vertex))
