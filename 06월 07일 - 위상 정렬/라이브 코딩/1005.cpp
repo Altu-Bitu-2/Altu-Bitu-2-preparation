@@ -22,12 +22,13 @@ int topologicalSort(int n, int w, vector<int> &delay, vector<int> &indegree, vec
 
         for (int i = 0; i < graph[node].size(); i++) {
             int next_node = graph[node][i];
+            //다음 정점의 최소 시간 계산 -> 이어진 전 정점(현재 정점) 중 가장 긴 시간의 건물을 선택
+            dp[next_node] = max(dp[next_node], dp[node] + delay[next_node]);
+
             indegree[next_node]--; //연결된 정점의 진입차수를 1씩 감소
             if (!indegree[next_node]) { //연결된 정점의 진입차수가 0이 되었다면
                 q.push(next_node);
             }
-            //다음 정점의 최소 시간 계산 -> 이어진 전 정점(현재 정점) 중 가장 긴 시간의 건물을 선택
-            dp[next_node] = max(dp[next_node], dp[node] + delay[next_node]);
         }
     }
     return dp[w];
