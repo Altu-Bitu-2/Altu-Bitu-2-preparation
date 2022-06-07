@@ -26,9 +26,14 @@ int topologicalSort(int n, int w, vector<int> &delay, vector<int> &indegree, vec
             dp[next_node] = max(dp[next_node], dp[node] + delay[next_node]);
 
             indegree[next_node]--; //연결된 정점의 진입차수를 1씩 감소
-            if (!indegree[next_node]) { //연결된 정점의 진입차수가 0이 되었다면
-                q.push(next_node);
+            if (indegree[next_node]) {
+                continue;
             }
+            //연결된 정점의 진입차수가 0이 되었다면
+            if (next_node == w) {
+                return dp[w];
+            }
+            q.push(next_node);
         }
     }
     return dp[w];
