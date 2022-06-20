@@ -7,6 +7,7 @@ using namespace std;
 typedef pair<int, int> ci;
 const int SIZE = 4;
 
+int answer = 1e9;
 int dr[4] = {-1, 1, 0, 0};
 int dc[4] = {0, 0, -1, 1};
 
@@ -51,7 +52,7 @@ int bfs(int r1, int c1, int r2, int c2, vector<vector<int>> &tmp) {
 
         for (int i = 0; i < 4; i++) { //방향키 입력 이동
             int nr = row + dr[i], nc = col + dc[i];
-            if (nr < 0 || nr >= 4 || nc < 0 || nc >= 4 || visited[nr][nc]) {
+            if (nr < 0 || nr >= SIZE || nc < 0 || nc >= SIZE || visited[nr][nc]) {
                 continue;
             }
             visited[nr][nc] = dist + 1;
@@ -71,14 +72,17 @@ int matchCard(int bit, int num, int r, int c, vector<int> &seq, vector<vector<ci
             now = 1;
         }
         for (int j = 0; j < 2; j++) {
-            now = (now + j) % 2; //이번에 매칭할 카드 인덱스
             int nr = cards[cur][now].first, nc = cards[cur][now].second; //이번에 매칭할 카드 위치
             ans += bfs(r, c, nr, nc, tmp); //현재 커서에서 목표 카드까지 이동하는 비용
-
+            //기존 최솟값보다 큰 경우 -> 더 이상의 탐색 불필요
+            if (ans >= answer) {
+                return answer;
+            }
             //카드 삭제 + 커서 이동
             tmp[nr][nc] = 0;
             r = nr;
             c = nc;
+            now = 1 - now; //다음에 매칭할 카드 인덱스
         }
     }
     return ans;
@@ -101,8 +105,6 @@ vector<vector<ci>> findCard(vector<vector<int>> &board) {
 }
 
 int solution(vector<vector<int>> board, int r, int c) {
-    int answer = 1e9;
-
     vector<vector<ci>> cards = findCard(board); //존재하는 모든 카드의 위치
     int card_cnt = cards.size() - 1; //카드의 개수
 
