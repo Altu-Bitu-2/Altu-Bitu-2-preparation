@@ -46,7 +46,7 @@ def kruskal(n, vertex):
         if cnt == n - 1:
             return cost
 
-    return cost
+    return 0
 
 # 입력
 n, m, k = map(int, input().split())
