@@ -7,7 +7,6 @@ using namespace std;
 typedef pair<int, int> ci;
 const int SIZE = 4;
 
-int answer = 1e9;
 int dr[4] = {-1, 1, 0, 0};
 int dc[4] = {0, 0, -1, 1};
 
@@ -63,7 +62,8 @@ int bfs(int r1, int c1, int r2, int c2, vector<vector<int>> &tmp) {
 }
 
 //조합에 대해 카드를 매칭하는 함수
-int matchCard(int bit, int num, int r, int c, vector<int> &seq, vector<vector<ci>> &cards, vector<vector<int>> tmp) {
+int matchCard(int bit, int num, int r, int c, int answer, vector<int> &seq, vector<vector<ci>> &cards,
+              vector<vector<int>> tmp) {
     int ans = 0;
     for (int i = 0; i < num; i++) {
         int cur = seq[i]; //이번에 매칭할 캐릭터
@@ -105,6 +105,7 @@ vector<vector<ci>> findCard(vector<vector<int>> &board) {
 }
 
 int solution(vector<vector<int>> board, int r, int c) {
+    int answer = 1e9;
     vector<vector<ci>> cards = findCard(board); //존재하는 모든 카드의 위치
     int card_cnt = cards.size() - 1; //카드의 개수
 
@@ -114,7 +115,7 @@ int solution(vector<vector<int>> board, int r, int c) {
     }
     do { //가능한 모든 카드 순서에 대해
         for (int bit = 0; bit < (1 << card_cnt); bit++) { //0, 1번째 카드 중 어떤 카드를 먼저 뒤집을지 결정
-            answer = min(answer, matchCard(bit, card_cnt, r, c, seq, cards, board));
+            answer = min(answer, matchCard(bit, card_cnt, r, c, answer, seq, cards, board));
         }
     } while (next_permutation(seq.begin(), seq.end()));
     return answer;

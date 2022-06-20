@@ -5,41 +5,43 @@
 using namespace std;
 typedef pair<int, int> ci;
 
-//위상정렬 + DP
-vector<vector<int>> topologicalSort(int n, vector<int> &indegree, vector<vector<ci>> &graph) {
+vector<int> bfs(int n, vector<vector<ci>> &graph) {
     queue<int> q;
-    vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0)); //각 부품이 몇 개 필요한지 저장
+    vector<int> cnt(n + 1, 0); //큐에 있는 부품 번호에 따른 개수 저장 + 방문체크
+    vector<int> ans(n + 1, 0); //기본 부품 개수 저장
 
-    for (int i = 1; i <= n; i++) {
-        if (!indegree[i]) { //진입차수가 0이라면 -> 기본 부품
-            q.push(i);
-            dp[i][i] = 1; //기본 부품 초기화
-        }
-    }
+    //시작 정점 초기화
+    q.push(n);
+    cnt[n] = 1;
+
     while (!q.empty()) {
-        int node = q.front();
+        int x = q.front();
         q.pop();
 
-        for (int i = 0; i < graph[node].size(); i++) {
-            int next_node = graph[node][i].first;
-            int cnt = graph[node][i].second; //필요한 부품 수
-            indegree[next_node]--;
-            if (!indegree[next_node]) {
-                q.push(next_node);
-            }
-            for (int j = 1; j <= n; j++) {
-                dp[next_node][j] += dp[node][j] * cnt; //(현재 정점을 이루는 부품 개수 * 필요한 현재 정점의 개수)를 더함
-            }
+        //리프노드(기본부품)인 경우
+        if (graph[x].empty()) {
+            ans[x] += cnt[x];
         }
+        //중간부품인 경우
+        for (int i = 0; i < graph[x].size(); i++) {
+            int y = graph[x][i].first;
+            int k = graph[x][i].second;
+            if (!cnt[y]) {
+                q.push(y);
+            }
+            cnt[y] += k * cnt[x];
+        }
+        cnt[x] = 0; //처리가 끝나면 0으로 리셋
     }
-    return dp;
+    return ans;
 }
 
 /**
  * [장난감 조립]
  *
- * 각 부품마다 종류별 필요한 부품 개수를 저장하기 위해 2차원 배열 사용 (행: 부품, 열: 행을 이루는데 각 부품별 필요한 개수)
- * 위상 정렬 순서에 따라, 이어진 다음 정점의 부품별 개수를 (현재 정점을 이루는 부품별 개수 * 필요한 현재 정점 수)를 더해주며 구함
+ * - 완제품을 만들기 위해 필요한 기본 부품의 개수를 구하는 문제
+ * -> x(필요한 부품) -> y(만들어지는 부품) 의 관계를 역으로 만들면 루트노드가 완제품이 되고 리프노드가 기본 부품이 됨
+ * -> 따라서, BFS/DFS 탐색을 통해 필요한 리프노드의 개수를 구함
  */
 int main() {
     int n, m, x, y, k;
@@ -47,20 +49,18 @@ int main() {
     //입력
     cin >> n >> m;
     vector<vector<ci>> graph(n + 1, vector<ci>(0));
-    vector<int> indegree(n + 1, 0);
     while (m--) {
-        cin >> x >> y >> k; //y -> x
-        indegree[x]++;
-        graph[y].push_back({x, k});
+        cin >> x >> y >> k;
+        graph[x].push_back({y, k});
     }
 
     //연산
-    vector<vector<int>> result = topologicalSort(n, indegree, graph);
+    vector<int> result = bfs(n, graph);
 
     //출력
     for (int i = 1; i <= n; i++) {
-        if (result[i][i]) { //기본 부품이라면
-            cout << i << ' ' << result[n][i] << '\n';
+        if (result[i]) {
+            cout << i << ' ' << result[i] << '\n';
         }
     }
     return 0;
