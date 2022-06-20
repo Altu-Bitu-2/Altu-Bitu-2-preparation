@@ -43,21 +43,20 @@ def kruskal(n, vertex):
         cost += w
         cnt += 1
 
-        if cnt == n-1:
+        if cnt == n - 1:
             return cost
 
     return cost
 
 # 입력
 n, m, k = map(int, input().split())
-power_plant = list(map(int, input().split()))
 
 # 초기화
 parent = [-1]*(n+1)
 
 # 가상의 정점(0)에 연결
 parent[0] = -k
-for city in power_plant:
+for city in map(int, input().split()):
     parent[city] = 0
 
 # 입력
@@ -65,4 +64,5 @@ vertex = [tuple(map(int, input().split())) for _ in range(m)]
 vertex.sort(key=lambda x:x[2])  # 정렬
 
 # 연산 & 출력
-print(kruskal(n, vertex))
+# 발전소를 모두 가상의 정점에 연결하였기 때문에 이때 남은 정점의 개수는 n - k(발전소) + 1(가상의 정점)이다.
+print(kruskal(n - k + 1, vertex))

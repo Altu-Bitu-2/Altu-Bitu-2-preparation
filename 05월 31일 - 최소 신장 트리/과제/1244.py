@@ -23,6 +23,7 @@ def change_switch_boy(k, n, switch):
 def change_switch_girl(k, n, switch):
     k -= 1  # 인덱스는 0부터
     idx = 0
+    # 스위치 범위가 넘어가거나 좌우 대칭이 깨질 때가지
     while k-idx >= 0 and k+idx < n and switch[k-idx] == switch[k+idx]:
         switch[k-idx] = switch[k+idx] = 1 - switch[k+idx]
         idx += 1
