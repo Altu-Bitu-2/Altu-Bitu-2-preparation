@@ -57,9 +57,6 @@ def bfs(r1, c1, r2, c2, tmp):
     while que:
         row, col = que.popleft()
         dist = visited[row][col]
-
-        if row == r2 and col == c2:
-            return dist
         
         # 컨트롤 입력 이동
         for i in range(4):
@@ -108,7 +105,7 @@ def match_card(bit, num, r, c, seq, cards, board, answer):
             nr, nc = cards[curr][now]    # 이번에 매칭할 카드 위치
             ans += bfs(r, c, nr, nc, tmp)   # 현재 커서에서 목표 카드까지 이동하는 비용
 
-            # 기존 최솟값보다 작은 경우 -> 더 이상의 탐색 불필요
+            # 기존 최솟값보다 큰 경우 -> 더 이상의 탐색 불필요
             if ans >= answer:
                 return answer
 
