@@ -39,10 +39,10 @@ def union(x, y):
 
     return True
 
-def kruskal(n, vertex):
+def kruskal(n, edge):
     cost = 0
     cnt = 0
-    for u, v, w in vertex:
+    for u, v, w in edge:
         if not union(u, v):
             continue
         

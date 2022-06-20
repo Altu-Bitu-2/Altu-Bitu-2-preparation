@@ -40,11 +40,11 @@ def union(x, y):
 
     return True
 
-def kruskal(n, m, vertex, turn):
+def kruskal(n, m, edge, turn):
     cost = 0
     cnt = 0
     for w in range(turn, m+1):
-        u, v = vertex[w]
+        u, v = edge[w]
         if not union(u, v):
             continue
 
@@ -58,7 +58,7 @@ def kruskal(n, m, vertex, turn):
 
 n, m, k = map(int, input().split())
 
-vertex = [None] + [tuple(map(int, input().split())) for _ in range(m)]
+edge = [None] + [tuple(map(int, input().split())) for _ in range(m)]
 
 result = []
 
@@ -66,7 +66,7 @@ for turn in range(1, k+1):
     # 초기화
     parent = [-1]*(n+1)
     # 연산
-    result.append(kruskal(n, m, vertex, turn))
+    result.append(kruskal(n, m, edge, turn))
 
     if result[-1] == 0: # 이후의 턴은 모두 0점이므로
         break
