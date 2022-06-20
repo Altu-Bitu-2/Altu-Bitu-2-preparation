@@ -33,13 +33,12 @@ def union(x, y):
 
     return True
 
-def kruskal(n, vertex):
+def kruskal(n, edge):
     cost = 0
     cnt = 0
-    for u, v, w in vertex:
-        if find_parent(u) == find_parent(v):
+    for u, v, w in edge:
+        if not union(u, v):
             continue
-        union(u, v)
         cost += w
         cnt += 1
 
@@ -60,9 +59,9 @@ for city in map(int, input().split()):
     parent[city] = 0
 
 # 입력
-vertex = [tuple(map(int, input().split())) for _ in range(m)]
-vertex.sort(key=lambda x:x[2])  # 정렬
+edge = [tuple(map(int, input().split())) for _ in range(m)]
+edge.sort(key=lambda x:x[2])  # 정렬
 
 # 연산 & 출력
 # 발전소를 모두 가상의 정점에 연결하였기 때문에 이때 남은 정점의 개수는 n - k(발전소) + 1(가상의 정점)이다.
-print(kruskal(n - k + 1, vertex))
+print(kruskal(n - k + 1, edge))

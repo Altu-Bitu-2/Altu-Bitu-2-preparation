@@ -36,10 +36,10 @@ def union(x, y):
 
     return True
 
-def kruskal(n, vertex):
+def kruskal(n, edge):
     cost = 0
     cnt = 0
-    for u, v, w in vertex:
+    for u, v, w in edge:
         if not union(u, v):
             continue
 
@@ -54,12 +54,12 @@ def kruskal(n, vertex):
 
 n, m = map(int, input().split())
 
-vertex = [tuple(map(int, input().split())) for _ in range(m)]
+edge = [tuple(map(int, input().split())) for _ in range(m)]
 
 # 초기화
 parent = [-1]*(n+1)
 
-vertex.sort(key=lambda x:x[2])  # 정렬
+edge.sort(key=lambda x:x[2])  # 정렬
 
 # 연산 & 출력
-print(kruskal(n-1, vertex))
+print(kruskal(n-1, edge))
