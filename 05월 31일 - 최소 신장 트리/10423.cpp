@@ -49,7 +49,7 @@ int kruskal(int n, vector<tp> &edges) {
             return sum;
         }
     }
-    return sum;
+    return 0;
 }
 
 /**
@@ -67,7 +67,7 @@ int main() {
     cin >> n >> m >> k;
     vector<tp> edge;
     parent.assign(n + 1, -1);
-    while (k--) {
+    for (int i = 0; i < k; i++) {
         cin >> u;
         parent[u] = 0; //0번 정점과 연결됐다고 생각
     }
@@ -80,6 +80,6 @@ int main() {
     sort(edge.begin(), edge.end());
 
     //연산 & 출력
-    cout << kruskal(n, edge);
+    cout << kruskal(n - k + 1, edge); //k개의 정점은 이미 연결된 상태이므로 n - k개의 간선만 선택해도 됨
     return 0;
 }

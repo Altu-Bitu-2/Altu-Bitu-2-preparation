@@ -49,7 +49,7 @@ int kruskal(int n, vector<tp> &edge) {
             return sum;
         }
     }
-    return sum;
+    return 0;
 }
 
 /**
